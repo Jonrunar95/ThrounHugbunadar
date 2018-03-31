@@ -1,4 +1,11 @@
-package LoginAndRegister;
+package View;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JFrame;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -41,7 +48,7 @@ public class RegisterForm extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jTextNotendaNafn = new javax.swing.JTextField();
-        jTextPassword = new javax.swing.JPasswordField();
+        jTextPassword1 = new javax.swing.JPasswordField();
         jButtonHaetta = new javax.swing.JButton();
         jButtonRegister = new javax.swing.JButton();
         jLabelRegister = new javax.swing.JLabel();
@@ -50,7 +57,7 @@ public class RegisterForm extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jTextKennitala = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jPasswordField2 = new javax.swing.JPasswordField();
+        jTextPassword2 = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -97,7 +104,7 @@ public class RegisterForm extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(12, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabelMin)
@@ -119,9 +126,9 @@ public class RegisterForm extends javax.swing.JFrame {
         jTextNotendaNafn.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
         jTextNotendaNafn.setForeground(new java.awt.Color(228, 241, 254));
 
-        jTextPassword.setBackground(new java.awt.Color(108, 122, 137));
-        jTextPassword.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
-        jTextPassword.setForeground(new java.awt.Color(228, 241, 254));
+        jTextPassword1.setBackground(new java.awt.Color(108, 122, 137));
+        jTextPassword1.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
+        jTextPassword1.setForeground(new java.awt.Color(228, 241, 254));
 
         jButtonHaetta.setBackground(new java.awt.Color(192, 57, 43));
         jButtonHaetta.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
@@ -173,9 +180,9 @@ public class RegisterForm extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(236, 240, 241));
         jLabel8.setText("Lykilorð Aftur:");
 
-        jPasswordField2.setBackground(new java.awt.Color(108, 122, 137));
-        jPasswordField2.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
-        jPasswordField2.setForeground(new java.awt.Color(228, 241, 254));
+        jTextPassword2.setBackground(new java.awt.Color(108, 122, 137));
+        jTextPassword2.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
+        jTextPassword2.setForeground(new java.awt.Color(228, 241, 254));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -203,12 +210,11 @@ public class RegisterForm extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTextPassword, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jTextNafn)
-                                .addComponent(jTextNotendaNafn)
-                                .addComponent(jTextKennitala)))))
+                            .addComponent(jTextPassword2, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextPassword1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTextNafn)
+                            .addComponent(jTextNotendaNafn)
+                            .addComponent(jTextKennitala))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -228,12 +234,12 @@ public class RegisterForm extends javax.swing.JFrame {
                     .addComponent(jTextKennitala, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextPassword1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextPassword2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonHaetta, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -284,33 +290,42 @@ public class RegisterForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabelRegisterMouseClicked
 
     private void jButtonRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegisterActionPerformed
-        
-        
+        Connection connection = null;
+        String nafn = jTextNafn.getText();
+        String username = jTextNotendaNafn.getText();
+        char[] charPassword1 = jTextPassword1.getPassword();
+        String password1 = String.valueOf(charPassword1);
+        char[] charPassword2 = jTextPassword2.getPassword();
+        String password2 = String.valueOf(charPassword2);
+        String ssn = jTextKennitala.getText();
         try {
-            String url = "jdbc:derby://localhost:1527/logindatabase";
-            String username = "logindata";
-            String password = "logindata";
-            Connection conn = DriverManager.getConnection(url, username, password);
-            Statement stmt = conn.createStatement();
-            char[] charPassword = jTextPassword.getPassword();
-            String passwordForUser = String.valueOf(charPassword);
+            connection =  DriverManager.getConnection("jdbc:sqlite:C:/Users/Notandi/Documents/Skóli/Þróun Hugbúnaðar/ThrounHugbunadar/Hoteldb.db");
+            Statement statement = connection.createStatement();
+            statement.setQueryTimeout(30);
+            String searchForUser = "SELECT * from User where name = '" + username + "'";
+            ResultSet rs = statement.executeQuery(searchForUser);
             
-            String Query = "INSERT INTO REGISTER (NAFN, USERNAME, PASSWORD, KENNITALA) VALUES ('"+jTextNafn.getText()+"', '"+jTextNotendaNafn.getText()+"', '"+passwordForUser+"' ,'"+jTextKennitala.getText()+"')";
-            
-            if(jTextNafn.getText().equals("") || jTextNotendaNafn.getText().equals("") || passwordForUser.equals("")) {
+            if(jTextNafn.getText().equals("") || username.equals("") || password1.equals("")) {
                 JOptionPane.showMessageDialog(null, "Nýskráning mistókst, vinsamlegast fylltu í alla reitina!", "Nýskráning", JOptionPane.ERROR_MESSAGE);
-            } else{
-            
-            stmt.execute(Query);
-            
-            JOptionPane.showMessageDialog(null, "Nýskráning tókst", "Nýskráning", JOptionPane.INFORMATION_MESSAGE);
-            
-            LoginForm lgf = new LoginForm();
-            lgf.setVisible(true);
-            lgf.pack();
-            lgf.setLocationRelativeTo(null);
-            lgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            this.dispose();
+            } else if(!(password1.equals(password2))) {
+                JOptionPane.showMessageDialog(null, "Nýskráning mistókst, vinsamlegast hafðu sama password", "Nýskráning", JOptionPane.ERROR_MESSAGE);
+            } else if(rs.next()){
+                JOptionPane.showMessageDialog(null, "Nýskráning mistókst, notendarnafn frátekið", "Nýskráning", JOptionPane.ERROR_MESSAGE);
+            } else if(ssn.length() != 10) {
+                JOptionPane.showMessageDialog(null, "Nýskráning mistókst, kennitala verður að vera 10 stafir", "Nýskráning", JOptionPane.ERROR_MESSAGE);
+            }
+            else{
+                
+                String query = "INSERT INTO User(name, ssn, username, password) VALUES (" + nafn + ", " + ssn +", " + username + ", " + password1 + ")";
+                statement.executeUpdate(query);
+                JOptionPane.showMessageDialog(null, "Nýskráning tókst", "Nýskráning", JOptionPane.INFORMATION_MESSAGE);
+                
+                LoginForm lgf = new LoginForm();
+                lgf.setVisible(true);
+                lgf.pack();
+                lgf.setLocationRelativeTo(null);
+                lgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                this.dispose();
             }
             
         } catch (SQLException ex) {
@@ -386,10 +401,10 @@ public class RegisterForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelRegister;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPasswordField jPasswordField2;
     private javax.swing.JTextField jTextKennitala;
     private javax.swing.JTextField jTextNafn;
     private javax.swing.JTextField jTextNotendaNafn;
-    private javax.swing.JPasswordField jTextPassword;
+    private javax.swing.JPasswordField jTextPassword1;
+    private javax.swing.JPasswordField jTextPassword2;
     // End of variables declaration//GEN-END:variables
 }

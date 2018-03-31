@@ -10,21 +10,21 @@ VALUES (
     "Tungufell",
     5,
     "",
-    "wi-fi"
+    "Wi-fi;Morgunmatur;Tv;Spa;Airport"
 ),
 (
     "Hótel Laki",
     "Kirkjubæjarklaustur",
     4,
     "",
-    "wi-fi;bar;morgunmatur"
+    "Wi-fi;Fotlun;Morgunmatur;Likamsraekt;Gonguleidr"
 ),
 (
     "Hótel Reykjavík",
     "Reykjavík",
     3,
     "",
-    "morgunmatur;bílastæði;miðbæ"
+    "Morgunmatur;Midbaer;Sturta"
 );
 
 INSERT INTO Room (

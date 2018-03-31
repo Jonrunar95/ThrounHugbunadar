@@ -3,24 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Search;
+package View;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JFrame;
 
 /**
  *
  * @author Notandi
  */
-public class Search extends javax.swing.JFrame {
+public class SearchForm extends javax.swing.JFrame {
 
+    boolean checkBoxes[];
     /**
      * Creates new form Search
      */
-    public Search() {
+    public SearchForm() {
         initComponents();
     }
     
@@ -41,14 +43,22 @@ public class Search extends javax.swing.JFrame {
         jCheckBoxMorgunmatur = new javax.swing.JCheckBox();
         searchButton = new javax.swing.JButton();
         jCheckBoxMidbae = new javax.swing.JCheckBox();
+        jCheckBoxTv = new javax.swing.JCheckBox();
+        jCheckBoxSturta = new javax.swing.JCheckBox();
+        jCheckBoxAirport = new javax.swing.JCheckBox();
+        jCheckBoxSpa = new javax.swing.JCheckBox();
+        jCheckBoxLikamsraekt = new javax.swing.JCheckBox();
+        jCheckBoxGonguleid = new javax.swing.JCheckBox();
+        jCheckBoxFotlun = new javax.swing.JCheckBox();
+        jButtonInnskraning = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabelSearch.setText("Hotel name:");
 
-        jCheckBoxWiFi.setText("wi-fi");
+        jCheckBoxWiFi.setText("Frítt wi-fi");
 
-        jCheckBoxMorgunmatur.setText("Morgunmatur");
+        jCheckBoxMorgunmatur.setText("Morgunmatur innifalinn");
 
         searchButton.setText("Search");
         searchButton.addActionListener(new java.awt.event.ActionListener() {
@@ -59,23 +69,60 @@ public class Search extends javax.swing.JFrame {
 
         jCheckBoxMidbae.setText("Nálægt miðbæ");
 
+        jCheckBoxTv.setText("Tv");
+
+        jCheckBoxSturta.setText("Sturta");
+
+        jCheckBoxAirport.setText("Airport pickup/drop off");
+
+        jCheckBoxSpa.setText("Spa");
+
+        jCheckBoxLikamsraekt.setText("Líkamsrækt");
+
+        jCheckBoxGonguleid.setText("Göngu/Hjólaleiðir");
+
+        jCheckBoxFotlun.setText("Aðstaða fyrir fólk með fötlun");
+
+        jButtonInnskraning.setText("Innskráning");
+        jButtonInnskraning.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonInnskraningActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(searchButton)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jCheckBoxMorgunmatur)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabelSearch)
-                            .addGap(18, 18, 18)
-                            .addComponent(jTextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jCheckBoxWiFi)
-                        .addComponent(jCheckBoxMidbae)))
-                .addContainerGap(109, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jCheckBoxFotlun)
+                                .addGap(84, 84, 84))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCheckBoxAirport)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabelSearch)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jTextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jCheckBoxLikamsraekt)
+                                    .addComponent(jCheckBoxWiFi)
+                                    .addComponent(jCheckBoxGonguleid))
+                                .addGap(59, 59, 59)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCheckBoxMorgunmatur)
+                            .addComponent(jCheckBoxSpa)
+                            .addComponent(jCheckBoxSturta)
+                            .addComponent(jCheckBoxTv)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jButtonInnskraning)
+                                .addComponent(jCheckBoxMidbae)))))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -85,35 +132,70 @@ public class Search extends javax.swing.JFrame {
                     .addComponent(jLabelSearch)
                     .addComponent(jTextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jCheckBoxWiFi)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCheckBoxFotlun)
+                    .addComponent(jCheckBoxMorgunmatur))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBoxMorgunmatur)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCheckBoxAirport)
+                    .addComponent(jCheckBoxMidbae))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(jCheckBoxWiFi))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBoxSpa)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBoxMidbae)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
-                .addComponent(searchButton)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jCheckBoxGonguleid, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBoxLikamsraekt)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(searchButton)
+                            .addComponent(jButtonInnskraning))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jCheckBoxSturta)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBoxTv)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
+        checkBoxes = new boolean[] {
+            jCheckBoxFotlun.isSelected(), jCheckBoxAirport.isSelected(), jCheckBoxWiFi.isSelected(), jCheckBoxGonguleid.isSelected(), jCheckBoxLikamsraekt.isSelected(), 
+            jCheckBoxMorgunmatur.isSelected(), jCheckBoxMidbae.isSelected(), jCheckBoxSpa.isSelected(), jCheckBoxSturta.isSelected(), jCheckBoxTv.isSelected()
+        };
+        String[] queries = {"Fotlun", "Airport", "Wi-fi", "Gonguleid", "Likamsraekt", "Morgunmatur", "Midbaer", "Spa", "Sturta", "Tv"};
         String searchString = jTextFieldSearch.getText();
-        System.out.println(searchString);
-        System.out.print(jCheckBoxWiFi.isSelected());
-        System.out.print(jCheckBoxMorgunmatur.isSelected());
-        System.out.print(jCheckBoxMidbae.isSelected());
+        String query = "";
+        for (int i = 0; i < 10; i++) {
+            if (checkBoxes[i] == true) {
+                query += " AND conveniences LIKE '%" + queries[i] + "%'";
+            }
+        }
         Connection connection = null;
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:C:/Users/Notandi/Documents/Skóli/Þróun Hugbúnaðar/ThrounHugbunadar/Hoteldb.db");
             Statement statement = connection.createStatement();
             statement.setQueryTimeout(30);
             //statement.executeUpdate("insert into table values(1,2)");
-            ResultSet rs = statement.executeQuery("Select name, location from Hotel where name like '%" + searchString + "%'");
+            ResultSet rs = statement.executeQuery("SELECT * from Hotel where name like '%" + searchString + "%'" + query);
+            //System.out.print("SELECT * from Hotel where name like '%" + searchString + "%'" + query);
             while(rs.next()) {
+                String strLine = rs.getString("conveniences");
+                String[] conveniences = strLine.split(":");
                 System.out.println("Hotelið heitir " + rs.getString("name"));
-                System.out.println("Staðsetningin er " + rs.getString("location"));
+                System.out.println("Staðsetningin er " + rs.getString("location"));                
+                for (String convenience : conveniences) {
+                    System.out.println("Hótelið inniheldur: " + convenience);
+                }
             }
         }
         catch(SQLException e) {
@@ -135,6 +217,15 @@ public class Search extends javax.swing.JFrame {
         
     }//GEN-LAST:event_searchButtonActionPerformed
 
+    private void jButtonInnskraningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInnskraningActionPerformed
+        LoginForm lf = new LoginForm();
+        lf.setVisible(true);
+        lf.pack();
+        lf.setLocationRelativeTo(null);
+        lf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();
+    }//GEN-LAST:event_jButtonInnskraningActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -152,27 +243,36 @@ public class Search extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Search.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SearchForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Search.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SearchForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Search.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SearchForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Search.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SearchForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Search().setVisible(true);
+                new SearchForm().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonInnskraning;
+    private javax.swing.JCheckBox jCheckBoxAirport;
+    private javax.swing.JCheckBox jCheckBoxFotlun;
+    private javax.swing.JCheckBox jCheckBoxGonguleid;
+    private javax.swing.JCheckBox jCheckBoxLikamsraekt;
     private javax.swing.JCheckBox jCheckBoxMidbae;
     private javax.swing.JCheckBox jCheckBoxMorgunmatur;
+    private javax.swing.JCheckBox jCheckBoxSpa;
+    private javax.swing.JCheckBox jCheckBoxSturta;
+    private javax.swing.JCheckBox jCheckBoxTv;
     private javax.swing.JCheckBox jCheckBoxWiFi;
     private javax.swing.JLabel jLabelSearch;
     private javax.swing.JTextField jTextFieldSearch;

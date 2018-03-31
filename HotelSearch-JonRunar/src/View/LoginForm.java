@@ -1,17 +1,17 @@
-package LoginAndRegister;
+package View;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JFrame;
-import com.sun.jndi.ldap.Connection;
-import java.awt.Toolkit;
-import java.awt.event.WindowEvent;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-
+import java.awt.Toolkit;
+import java.awt.event.WindowEvent;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -24,9 +24,6 @@ import javax.swing.JOptionPane;
  * @author Alexander Þór
  */
 public class LoginForm extends javax.swing.JFrame {
-java.sql.Connection conn = null;
-ResultSet rs = null;
-Statement st;
 
 private JFrame frame;
     /**
@@ -241,18 +238,16 @@ private JFrame frame;
         String username = jTextFieldUsername.getText();
         char[] charPassword = jPasswordField.getPassword();
         String password = String.valueOf(charPassword);
-        
+        Connection connection = null;
         try {
             int log = 1;
-            conn = DriverManager.getConnection("jdbc:derby://localhost:1527/logindatabase","logindata","logindata");
-            st = (Statement)conn.createStatement();
-            rs = st.executeQuery("SELECT * from REGISTER");
+            connection = DriverManager.getConnection("jdbc:sqlite:C:/Users/Notandi/Documents/Skóli/Þróun Hugbúnaðar/ThrounHugbunadar/Hoteldb.db");
+            Statement statement = connection.createStatement();
+            statement.setQueryTimeout(30);
+            ResultSet rs = statement.executeQuery("SELECT * from User WHERE username = '" + username + "' AND password = '" + password + "'");
             
             while (rs.next()) {
-               if (rs.getString(2).equals(username) && rs.getString(3).equals(password)) {
                    log = 0;
-                   break;
-               }
             }
             if (log == 0) { //Rétt password og username 
                             //þá ætti að birtast nýr JFrame gluggi sem er með

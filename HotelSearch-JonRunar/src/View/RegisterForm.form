@@ -158,8 +158,8 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jPasswordField2" alignment="0" min="-2" pref="230" max="-2" attributes="0"/>
-                              <Component id="jTextPassword" alignment="1" max="32767" attributes="0"/>
+                              <Component id="jTextPassword2" alignment="0" min="-2" pref="230" max="-2" attributes="0"/>
+                              <Component id="jTextPassword1" alignment="1" max="32767" attributes="0"/>
                               <Component id="jTextNafn" max="32767" attributes="0"/>
                               <Component id="jTextNotendaNafn" max="32767" attributes="0"/>
                               <Component id="jTextKennitala" alignment="0" max="32767" attributes="0"/>
@@ -190,13 +190,13 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jTextPassword" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextPassword1" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jPasswordField2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextPassword2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -246,7 +246,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JPasswordField" name="jTextPassword">
+        <Component class="javax.swing.JPasswordField" name="jTextPassword1">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="89" green="7a" red="6c" type="rgb"/>
@@ -369,7 +369,7 @@
             <Property name="text" type="java.lang.String" value="Lykilor&#xf0; Aftur:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JPasswordField" name="jPasswordField2">
+        <Component class="javax.swing.JPasswordField" name="jTextPassword2">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="89" green="7a" red="6c" type="rgb"/>

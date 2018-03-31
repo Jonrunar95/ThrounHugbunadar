@@ -1,4 +1,4 @@
-package LoginAndRegister;
+package View;
 
 
 /*

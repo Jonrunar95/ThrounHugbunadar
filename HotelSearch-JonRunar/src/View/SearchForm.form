@@ -23,22 +23,44 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="searchButton" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jCheckBoxMorgunmatur" min="-2" max="-2" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabelSearch" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jTextFieldSearch" min="-2" pref="171" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="searchButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jCheckBoxFotlun" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jCheckBoxAirport" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jLabelSearch" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="jTextFieldSearch" min="-2" pref="157" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="jCheckBoxLikamsraekt" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jCheckBoxWiFi" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jCheckBoxGonguleid" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <Component id="jCheckBoxWiFi" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jCheckBoxMidbae" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jCheckBoxMorgunmatur" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCheckBoxSpa" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCheckBoxSturta" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCheckBoxTv" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                              <Component id="jButtonInnskraning" min="-2" max="-2" attributes="0"/>
+                              <Component id="jCheckBoxMidbae" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="109" max="32767" attributes="0"/>
+              <EmptySpace pref="24" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -51,14 +73,45 @@
                   <Component id="jTextFieldSearch" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jCheckBoxWiFi" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jCheckBoxFotlun" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jCheckBoxMorgunmatur" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jCheckBoxMorgunmatur" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jCheckBoxAirport" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jCheckBoxMidbae" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                      <Component id="jCheckBoxWiFi" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jCheckBoxSpa" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jCheckBoxMidbae" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="106" max="32767" attributes="0"/>
-              <Component id="searchButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jCheckBoxGonguleid" min="-2" pref="22" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jCheckBoxLikamsraekt" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="82" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="searchButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonInnskraning" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jCheckBoxSturta" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jCheckBoxTv" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+              </Group>
           </Group>
       </Group>
     </DimensionLayout>
@@ -73,12 +126,12 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="jCheckBoxWiFi">
       <Properties>
-        <Property name="text" type="java.lang.String" value="wi-fi"/>
+        <Property name="text" type="java.lang.String" value="Fr&#xed;tt wi-fi"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jCheckBoxMorgunmatur">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Morgunmatur"/>
+        <Property name="text" type="java.lang.String" value="Morgunmatur innifalinn"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="searchButton">
@@ -93,6 +146,49 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="N&#xe1;l&#xe6;gt mi&#xf0;b&#xe6;"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="jCheckBoxTv">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Tv"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="jCheckBoxSturta">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Sturta"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="jCheckBoxAirport">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Airport pickup/drop off"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="jCheckBoxSpa">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Spa"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="jCheckBoxLikamsraekt">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="L&#xed;kamsr&#xe6;kt"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="jCheckBoxGonguleid">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="G&#xf6;ngu/Hj&#xf3;lalei&#xf0;ir"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="jCheckBoxFotlun">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="A&#xf0;sta&#xf0;a fyrir f&#xf3;lk me&#xf0; f&#xf6;tlun"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButtonInnskraning">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Innskr&#xe1;ning"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonInnskraningActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
