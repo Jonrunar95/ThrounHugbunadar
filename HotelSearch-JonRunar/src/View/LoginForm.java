@@ -1,5 +1,6 @@
 package View;
 
+import static Controller.LoginController.login;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -238,37 +239,20 @@ private JFrame frame;
         String username = jTextFieldUsername.getText();
         char[] charPassword = jPasswordField.getPassword();
         String password = String.valueOf(charPassword);
-        Connection connection = null;
-        try {
-            int log = 1;
-            connection = DriverManager.getConnection("jdbc:sqlite:C:/Users/Notandi/Documents/Skóli/Þróun Hugbúnaðar/ThrounHugbunadar/Hoteldb.db");
-            Statement statement = connection.createStatement();
-            statement.setQueryTimeout(30);
-            ResultSet rs = statement.executeQuery("SELECT * from User WHERE username = '" + username + "' AND password = '" + password + "'");
-            
-            while (rs.next()) {
-                   log = 0;
-            }
-            if (log == 0) { //Rétt password og username 
-                            //þá ætti að birtast nýr JFrame gluggi sem er með
-                            //hótel hugbúnaðinum.
-                            
-                HotelForm hf = new HotelForm();
-                hf.setVisible(true);
-                hf.pack();
-                hf.setLocationRelativeTo(null);
-                hf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                this.dispose();
-            }
-            else {
-                JOptionPane.showMessageDialog(null, "Innskráning mistókst", "Innskráning", JOptionPane.ERROR_MESSAGE);
-                jTextFieldUsername.setText("");
-                jPasswordField.setText("");
-                
-            }
-        } catch (SQLException ex) { 
-        Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
-    } 
+        int log = login(username, password);
+        if(log == 0) {
+            HotelForm hf = new HotelForm();
+            hf.setVisible(true);
+            hf.pack();
+            hf.setLocationRelativeTo(null);
+            hf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            this.dispose();
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Innskráning mistókst", "Innskráning", JOptionPane.ERROR_MESSAGE);
+            jTextFieldUsername.setText("");
+            jPasswordField.setText("");
+        }
     }//GEN-LAST:event_jButtonLoginActionPerformed
 
     /**

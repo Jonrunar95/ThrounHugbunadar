@@ -1,11 +1,6 @@
 package View;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import javax.swing.JFrame;
+import static Controller.RegisterController.register;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -19,7 +14,6 @@ import javax.swing.JFrame;
  */
 
 import javax.swing.*;
-import java.sql.*;
 
 public class RegisterForm extends javax.swing.JFrame {
 
@@ -290,46 +284,24 @@ public class RegisterForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabelRegisterMouseClicked
 
     private void jButtonRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegisterActionPerformed
-        Connection connection = null;
         String nafn = jTextNafn.getText();
+        String ssn = jTextKennitala.getText();
         String username = jTextNotendaNafn.getText();
         char[] charPassword1 = jTextPassword1.getPassword();
         String password1 = String.valueOf(charPassword1);
         char[] charPassword2 = jTextPassword2.getPassword();
         String password2 = String.valueOf(charPassword2);
-        String ssn = jTextKennitala.getText();
-        try {
-            connection =  DriverManager.getConnection("jdbc:sqlite:C:/Users/Notandi/Documents/Skóli/Þróun Hugbúnaðar/ThrounHugbunadar/Hoteldb.db");
-            Statement statement = connection.createStatement();
-            statement.setQueryTimeout(30);
-            String searchForUser = "SELECT * from User where name = '" + username + "'";
-            ResultSet rs = statement.executeQuery(searchForUser);
-            
-            if(jTextNafn.getText().equals("") || username.equals("") || password1.equals("")) {
-                JOptionPane.showMessageDialog(null, "Nýskráning mistókst, vinsamlegast fylltu í alla reitina!", "Nýskráning", JOptionPane.ERROR_MESSAGE);
-            } else if(!(password1.equals(password2))) {
-                JOptionPane.showMessageDialog(null, "Nýskráning mistókst, vinsamlegast hafðu sama password", "Nýskráning", JOptionPane.ERROR_MESSAGE);
-            } else if(rs.next()){
-                JOptionPane.showMessageDialog(null, "Nýskráning mistókst, notendarnafn frátekið", "Nýskráning", JOptionPane.ERROR_MESSAGE);
-            } else if(ssn.length() != 10) {
-                JOptionPane.showMessageDialog(null, "Nýskráning mistókst, kennitala verður að vera 10 stafir", "Nýskráning", JOptionPane.ERROR_MESSAGE);
-            }
-            else{
-                
-                String query = "INSERT INTO User(name, ssn, username, password) VALUES (" + nafn + ", " + ssn +", " + username + ", " + password1 + ")";
-                statement.executeUpdate(query);
-                JOptionPane.showMessageDialog(null, "Nýskráning tókst", "Nýskráning", JOptionPane.INFORMATION_MESSAGE);
-                
-                LoginForm lgf = new LoginForm();
-                lgf.setVisible(true);
-                lgf.pack();
-                lgf.setLocationRelativeTo(null);
-                lgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                this.dispose();
-            }
-            
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex.toString());
+        String s = register(nafn, ssn, username, password1, password2);
+        if (s == "Nýskráning tókst") {
+            JOptionPane.showMessageDialog(null, "Nýskráning tókst", "Nýskráning", JOptionPane.INFORMATION_MESSAGE);
+            LoginForm lgf = new LoginForm();
+            lgf.setVisible(true);
+            lgf.pack();
+            lgf.setLocationRelativeTo(null);
+            lgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, s, "Nýskráning", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonRegisterActionPerformed
 
