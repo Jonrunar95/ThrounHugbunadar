@@ -6,6 +6,7 @@
 package View;
 
 import Controller.SearchController;
+import Model.Room;
 import javax.swing.JFrame;
 
 /**
@@ -181,7 +182,8 @@ public class SearchForm extends javax.swing.JFrame {
         };       
         String searchString = jTextFieldSearch.getText();
         search = new SearchController();
-        SearchController.search(checkBoxes, searchString);
+        Room[] room = SearchController.search(checkBoxes, searchString);
+        showRooms(room);
     }//GEN-LAST:event_searchButtonActionPerformed
 
     private void jButtonInnskraningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInnskraningActionPerformed
@@ -192,7 +194,12 @@ public class SearchForm extends javax.swing.JFrame {
         lf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.dispose();
     }//GEN-LAST:event_jButtonInnskraningActionPerformed
-
+    
+    private void showRooms(Room[] room) {
+        for(int i = 0; i < room.length; i++) {
+            System.out.print(room[i].getRoomid() + ", ");
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -247,4 +254,6 @@ public class SearchForm extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldSearch;
     private javax.swing.JButton searchButton;
     // End of variables declaration//GEN-END:variables
+
+
 }

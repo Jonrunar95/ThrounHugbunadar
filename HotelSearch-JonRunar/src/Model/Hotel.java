@@ -8,17 +8,14 @@ public class Hotel {
 	private int stars;
 	private String photo_url;
 	private String[] conveniences;
-	private HotelReview[] hotelReviews;
-	private Room[] rooms;
 	
-	public Hotel(int hotelId, String name, String location, int stars, String photo_url, String[] conveniences, Room[] rooms) {
+	public Hotel(int hotelId, String name, String location, int stars, String photo_url, String[] conveniences) {
 		this.hotelId = hotelId;
 		this.name = name;
 		this.location = location;
 		this.stars = stars;
 		this.photo_url = photo_url;
 		this.conveniences = conveniences;
-		this.rooms = rooms;
 	}
 	
 	public int getHotelId() {
@@ -56,25 +53,5 @@ public class Hotel {
 	}
 	public void setConveniences(String[] conveniences) {
 		this.conveniences = conveniences;
-	}
-	public 	HotelReview[] getHotelReviews() {
-		return hotelReviews;
-	}
-	public void setHotelReviews(HotelReview[] hotelReviews) {
-		this.hotelReviews = hotelReviews;
-	}
-	public Room[] getRooms() {
-		return rooms;
-	}
-	public void setRooms(Room[] rooms) {
-		this.rooms = rooms;
-	}
-	public void addHotelReview(HotelReview hotelReview) {
-		HotelReview[] temp = hotelReviews;
-		hotelReviews = new HotelReview[temp.length+1];
-		for(int i=0; i<temp.length-1; i++) {
-			hotelReviews[i] = temp[i];
-		}
-		hotelReviews[temp.length] = hotelReview;
 	}
 }
