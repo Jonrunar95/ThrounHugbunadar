@@ -41,28 +41,28 @@ INSERT INTO Room (
 VALUES (
     1,
     2,
-    true,
+    1,
     10000,
     1
 ),
 (
     2,
     1,
-    false,
+    0,
     8000,
     1
 ),
 (
     3,
     4,
-    true,
+    1,
     10000,
     3
 ),
 (
     4,
     2,
-    true,
+    1,
     10000,
     2
 );
@@ -80,7 +80,7 @@ VALUES (
     "123"
 );
 
-INSERT INTO RESERVATION (
+INSERT INTO Reservation (
     roomId,
     userId,
     date

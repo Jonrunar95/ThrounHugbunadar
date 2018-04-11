@@ -15,13 +15,15 @@ public class Room {
 
     private int roomid;
     private int size;
+    private boolean tvibreitt;
     private double price;
     private Hotel hotel;
 
     //Constructor
-    public Room(int roomID, int roomSize, double roomPrice, Hotel roomHotel) {
+    public Room(int roomID, int roomSize, boolean roomTvibreitt, double roomPrice, Hotel roomHotel) {
         roomid = roomID;
         size = roomSize;
+        tvibreitt = roomTvibreitt;
         price = roomPrice;
         hotel = roomHotel;
     }
@@ -58,7 +60,14 @@ public class Room {
     public void setSize(int size) {
         this.size = size;
     }
+    
+    public boolean isTvibreitt() {
+        return tvibreitt;
+    }
 
+    public void setTvibreitt(boolean tvibreitt) {
+        this.tvibreitt = tvibreitt;
+    }
     /**
      * @return the price
      */
