@@ -10,6 +10,7 @@ CREATE TABLE Hotel (
 CREATE TABLE Room (
     id              serial primary key,
     size            int NOT NULL,
+    tvibreitt       boolean NOT NULL  
     price           int NOT NULL,
     hotelId        int NOT NULL,
     FOREIGN KEY (hotelId) REFERENCES Hotel(id) 

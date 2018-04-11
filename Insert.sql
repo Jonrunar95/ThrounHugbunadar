@@ -1,4 +1,5 @@
 INSERT INTO Hotel (
+    id,
     name,
     location,
     stars,
@@ -6,6 +7,7 @@ INSERT INTO Hotel (
     conveniences
 )
 VALUES (
+    1,
     "Hótel Gullfoss",
     "Tungufell",
     5,
@@ -13,6 +15,7 @@ VALUES (
     "Wi-fi;Morgunmatur;Tv;Spa;Airport"
 ),
 (
+    2,
     "Hótel Laki",
     "Kirkjubæjarklaustur",
     4,
@@ -20,6 +23,7 @@ VALUES (
     "Wi-fi;Fotlun;Morgunmatur;Likamsraekt;Gonguleidr"
 ),
 (
+    3,
     "Hótel Reykjavík",
     "Reykjavík",
     3,
@@ -28,27 +32,37 @@ VALUES (
 );
 
 INSERT INTO Room (
+    id,
     size,
+    tvibreitt,
     price,
     hotelId
 )
 VALUES (
-    100,
+    1,
+    2,
+    true,
     10000,
     1
 ),
 (
-    900,
+    2,
+    1,
+    false,
     8000,
     1
 ),
 (
-    100,
+    3,
+    4,
+    true,
     10000,
     3
 ),
 (
-    100,
+    4,
+    2,
+    true,
     10000,
     2
 );
