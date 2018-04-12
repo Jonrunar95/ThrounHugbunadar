@@ -24,7 +24,7 @@ public class SearchControllerTest {
     @Test
     public void testSearch() {
         boolean[] boxes = {false,false,false,false,false,false,false,false,false,false};
-        search(boxes, "Hótel");
+        //search(boxes, "Hótel");
     }
     
 }

@@ -1,5 +1,11 @@
 package View;
 
+import Model.Hotel;
+import Model.Room;
+import java.util.ArrayList;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -12,14 +18,38 @@ package View;
  * @author alex
  */
 public class HotelForm extends javax.swing.JFrame {
-
+    private ArrayList<Room> herbergi;
+    private ArrayList<Hotel> hotel;
+    private int sida;
     /**
      * Creates new form HotelForm
      */
     public HotelForm() {
         initComponents();
+        sida = 1;
+        fyrra.setEnabled(false);
+        stillaSidu();
     }
-
+    
+    public void setHerbergi(ArrayList<Room> herbergi) {
+        this.herbergi = herbergi;
+    }
+    
+    public void setHotel (ArrayList<Hotel> hotel) {
+        this.hotel = hotel;
+    }
+    
+    public void stillaSidu() {
+        if(hotel == null) throw new IllegalArgumentException("Upphafstilla þarf hótel!");
+        else {
+            stillaConv();
+            stillaMynd();
+            stillaNafn();
+            stillaStjornur();
+            stillaStads();
+            stillaNR();
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -29,21 +59,222 @@ public class HotelForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        heitiHotel = new javax.swing.JLabel();
+        conv8 = new javax.swing.JLabel();
+        naesta = new javax.swing.JButton();
+        hotelStjornur = new javax.swing.JLabel();
+        fyrra = new javax.swing.JButton();
+        conv9 = new javax.swing.JLabel();
+        nafnStadsetning = new javax.swing.JLabel();
+        haettaVid = new javax.swing.JButton();
+        conv0 = new javax.swing.JLabel();
+        skodaHerb = new javax.swing.JButton();
+        conv3 = new javax.swing.JLabel();
+        myndLabel = new javax.swing.JLabel();
+        conv1 = new javax.swing.JLabel();
+        nafnHotel = new javax.swing.JLabel();
+        conv4 = new javax.swing.JLabel();
+        stjornur = new javax.swing.JLabel();
+        conv2 = new javax.swing.JLabel();
+        stadsetning = new javax.swing.JLabel();
+        conv5 = new javax.swing.JLabel();
+        conv = new javax.swing.JLabel();
+        conv6 = new javax.swing.JLabel();
+        stadsSida = new javax.swing.JLabel();
+        conv7 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        heitiHotel.setText("heitiHotel");
+
+        conv8.setText("conv9");
+
+        naesta.setText("Next");
+        naesta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                naestanaestButton(evt);
+            }
+        });
+
+        hotelStjornur.setText("hotelStjornur");
+
+        fyrra.setText("Previous");
+        fyrra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fyrraActionPerformed(evt);
+            }
+        });
+
+        conv9.setText("conv0");
+
+        nafnStadsetning.setText("nafnStadsetning");
+
+        haettaVid.setText("Cancel");
+        haettaVid.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                haettaVidActionPerformed(evt);
+            }
+        });
+
+        conv0.setText("conv1");
+
+        skodaHerb.setText("Look at rooms");
+        skodaHerb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                skodaHerbActionPerformed(evt);
+            }
+        });
+
+        conv3.setText("conv2");
+
+        conv1.setText("conv3");
+
+        nafnHotel.setText("Hotel name:");
+
+        conv4.setText("conv4");
+
+        stjornur.setText("Stars:");
+
+        conv2.setText("conv5");
+
+        stadsetning.setText("Location:");
+
+        conv5.setText("conv6");
+
+        conv.setText("Conveniences:");
+
+        conv6.setText("conv7");
+
+        stadsSida.setText("3/4");
+
+        conv7.setText("conv8");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(myndLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(conv0)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(conv3))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(conv1)
+                                    .addComponent(conv2))
+                                .addGap(28, 28, 28)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(conv5)
+                                    .addComponent(conv4))))
+                        .addGap(37, 37, 37)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(conv7)
+                            .addComponent(conv6)
+                            .addComponent(conv8))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(stadsetning)
+                            .addComponent(nafnHotel)
+                            .addComponent(conv)
+                            .addComponent(stjornur))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(heitiHotel)
+                            .addComponent(hotelStjornur)
+                            .addComponent(nafnStadsetning))
+                        .addGap(44, 44, 44))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(stadsSida)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(skodaHerb)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(haettaVid)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(fyrra)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(conv9)
+                    .addComponent(naesta)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(nafnHotel)
+                        .addGap(3, 3, 3)
+                        .addComponent(heitiHotel)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(stjornur))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(15, 15, 15)
+                                .addComponent(hotelStjornur)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(stadsetning)
+                        .addGap(3, 3, 3)
+                        .addComponent(nafnStadsetning)
+                        .addGap(1, 1, 1)
+                        .addComponent(conv)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(conv0)
+                            .addComponent(conv3)
+                            .addComponent(conv6)
+                            .addComponent(conv9))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(conv1)
+                            .addComponent(conv4)
+                            .addComponent(conv7)))
+                    .addComponent(myndLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(conv2)
+                    .addComponent(conv8)
+                    .addComponent(conv5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(naesta)
+                    .addComponent(fyrra)
+                    .addComponent(haettaVid)
+                    .addComponent(skodaHerb)
+                    .addComponent(stadsSida))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void naestanaestButton(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_naestanaestButton
+        // TODO add your handling code here:
+        naestaSida();
+    }//GEN-LAST:event_naestanaestButton
+
+    private void fyrraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fyrraActionPerformed
+        // TODO add your handling code here:
+        fyrriSida();
+    }//GEN-LAST:event_fyrraActionPerformed
+
+    private void haettaVidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_haettaVidActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_haettaVidActionPerformed
+
+    private void skodaHerbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_skodaHerbActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_skodaHerbActionPerformed
 
     /**
      * @param args the command line arguments
@@ -81,5 +312,76 @@ public class HotelForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel conv;
+    private javax.swing.JLabel conv0;
+    private javax.swing.JLabel conv1;
+    private javax.swing.JLabel conv2;
+    private javax.swing.JLabel conv3;
+    private javax.swing.JLabel conv4;
+    private javax.swing.JLabel conv5;
+    private javax.swing.JLabel conv6;
+    private javax.swing.JLabel conv7;
+    private javax.swing.JLabel conv8;
+    private javax.swing.JLabel conv9;
+    private javax.swing.JButton fyrra;
+    private javax.swing.JButton haettaVid;
+    private javax.swing.JLabel heitiHotel;
+    private javax.swing.JLabel hotelStjornur;
+    private javax.swing.JLabel myndLabel;
+    private javax.swing.JButton naesta;
+    private javax.swing.JLabel nafnHotel;
+    private javax.swing.JLabel nafnStadsetning;
+    private javax.swing.JButton skodaHerb;
+    private javax.swing.JLabel stadsSida;
+    private javax.swing.JLabel stadsetning;
+    private javax.swing.JLabel stjornur;
     // End of variables declaration//GEN-END:variables
+
+      private void naestaSida() {
+        sida++;
+        if(sida==hotel.size()) naesta.setEnabled(false);
+        if(sida==2) fyrra.setEnabled(true);
+        stillaSidu();
+    }
+
+    private void fyrriSida() {
+        sida--;
+        if(sida==1) fyrra.setEnabled(false);
+        stillaSidu();
+    }
+
+    private void stillaConv() {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        JLabel[] jLabels = {conv0,conv1,conv2,conv3,conv4,conv5,conv6,conv7,conv8,conv9};
+        for(int i=0; i<10; i++) {
+            if(i<hotel.size()) jLabels[i].setText(hotel.get(sida-1).getConveniences()[i]);
+            else jLabels[i].setText("");
+        }
+    }
+
+    private void stillaMynd() {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        myndLabel.setIcon(new ImageIcon(hotel.get(sida-1).getPhoto_URL()));
+    }
+
+    private void stillaNafn() {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        heitiHotel.setText(hotel.get(sida-1).getName());
+    }
+
+    private void stillaStads() {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        nafnStadsetning.setText(hotel.get(sida-1).getLocation());
+    }
+
+    private void stillaStjornur() {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        hotelStjornur.setText(String.valueOf(hotel.get(sida-1).getStars()));
+    }
+
+    private void stillaNR() {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        stadsSida.setText(sida + "/" + hotel.size());
+    }
+
 }
