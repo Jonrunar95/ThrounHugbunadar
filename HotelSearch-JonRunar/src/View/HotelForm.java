@@ -26,7 +26,7 @@ import javax.swing.JLabel;
  *
  * @author alex
  */
-public class HotelForm extends javax.swing.JFrame {
+public final class HotelForm extends javax.swing.JFrame {
     private static ArrayList<Room> herbergi;
     private static ArrayList<Hotel> hotel;
     private static ArrayList<Date> dates;
@@ -36,6 +36,7 @@ public class HotelForm extends javax.swing.JFrame {
      * @param room
      * @param hotel
      * @param dates
+     * @throws java.io.IOException
      */
 
     public HotelForm(ArrayList<Room> room, ArrayList<Hotel> hotel, ArrayList<Date> dates) throws IOException {
@@ -44,17 +45,9 @@ public class HotelForm extends javax.swing.JFrame {
         HotelForm.herbergi = room;
         HotelForm.hotel = hotel;
         HotelForm.dates = dates;
-        sida = 1;stillaSidu();
-        fyrra.setEnabled(false);
+        sida = 1;
         stillaSidu();
-    }
-    
-    public void setHerbergi(ArrayList<Room> herbergi) {
-        this.herbergi = herbergi;
-    }
-    
-    public void setHotel (ArrayList<Hotel> hotel) {
-        this.hotel = hotel;
+        fyrra.setEnabled(false);
     }
     
     public void stillaSidu() throws IOException {

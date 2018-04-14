@@ -12,10 +12,13 @@ import static Controller.SearchController.search;
 import Model.Hotel;
 import Model.Room;
 import java.awt.Color;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -334,12 +337,17 @@ public class SearchForm extends javax.swing.JFrame {
         ArrayList<Hotel> hotel = getHotel();
         ArrayList<Date> dates = getTotalDates();
         
-        HotelForm hf = new HotelForm(room, hotel, dates);
-        hf.setVisible(true);
-        hf.pack();
-        hf.setLocationRelativeTo(null);
-        hf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.dispose();
+        HotelForm hf;
+        try {
+            hf = new HotelForm(room, hotel, dates);
+            hf.setVisible(true);
+            hf.pack();
+            hf.setLocationRelativeTo(null);
+            hf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            this.dispose();
+        } catch (IOException ex) {
+            Logger.getLogger(SearchForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_searchButtonActionPerformed
 
     private void jButtonInnskraningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInnskraningActionPerformed
