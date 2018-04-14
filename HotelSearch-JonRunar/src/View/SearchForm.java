@@ -7,12 +7,15 @@ package View;
 
 import Controller.SearchController;
 import static Controller.SearchController.search;
+import Model.Hotel;
 import Model.Room;
+import java.awt.Color;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -27,6 +30,7 @@ public class SearchForm extends javax.swing.JFrame {
      */
     public SearchForm() {
         initComponents();
+        this.setLocationRelativeTo(null); // center form in the scree
     }
     
     
@@ -40,29 +44,61 @@ public class SearchForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabelSearch = new javax.swing.JLabel();
-        jTextFieldSearch = new javax.swing.JTextField();
-        searchButton = new javax.swing.JButton();
-        jButtonInnskraning = new javax.swing.JButton();
-        jComboBoxRoomSize = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
-        jCheckBoxTvibreittRum = new javax.swing.JCheckBox();
-        jComboBoxPrice = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
-        jXDatePickerCheckIn = new org.jdesktop.swingx.JXDatePicker();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jXDatePickerCheckOut = new org.jdesktop.swingx.JXDatePicker();
-        jLabel6 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jComboBoxStars = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
+        jTextFieldSearch = new javax.swing.JTextField();
+        jXDatePickerCheckIn = new org.jdesktop.swingx.JXDatePicker();
+        jXDatePickerCheckOut = new org.jdesktop.swingx.JXDatePicker();
+        searchButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jComboBoxRoomSize = new javax.swing.JComboBox<>();
+        jCheckBoxTvibreittRum = new javax.swing.JCheckBox();
+        jLabel2 = new javax.swing.JLabel();
+        jComboBoxPrice = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        jComboBoxStars = new javax.swing.JComboBox<>();
+        jPanel3 = new javax.swing.JPanel();
+        jButtonInnskraning = new javax.swing.JButton();
+        jButtonMyHotels = new javax.swing.JButton();
+        jButtonNyskraning = new javax.swing.JButton();
+        jLabelMin = new javax.swing.JLabel();
+        jLabelExit = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
-        jLabelSearch.setText("Search");
+        jPanel2.setBackground(new java.awt.Color(75, 119, 190));
 
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 90, Short.MAX_VALUE)
+        );
+
+        jPanel1.setBackground(new java.awt.Color(228, 241, 254));
+
+        jTextFieldSearch.setFont(new java.awt.Font("Lucida Grande", 0, 15)); // NOI18N
+        jTextFieldSearch.setForeground(new java.awt.Color(204, 204, 204));
+        jTextFieldSearch.setText("Location or hotel address");
+        jTextFieldSearch.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextFieldSearchMouseClicked(evt);
+            }
+        });
+
+        jXDatePickerCheckIn.setBackground(new java.awt.Color(255, 255, 255));
+
+        jXDatePickerCheckOut.setBackground(new java.awt.Color(255, 255, 255));
+
+        searchButton.setBackground(new java.awt.Color(75, 119, 190));
+        searchButton.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        searchButton.setForeground(new java.awt.Color(255, 255, 255));
         searchButton.setText("Search");
         searchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -70,126 +106,183 @@ public class SearchForm extends javax.swing.JFrame {
             }
         });
 
-        jButtonInnskraning.setText("Innskráning");
+        jLabel1.setText("Room size:");
+
+        jComboBoxRoomSize.setBackground(new java.awt.Color(255, 255, 255));
+        jComboBoxRoomSize.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 Room", "2 Rooms", "3 Rooms", "4 Rooms" }));
+
+        jCheckBoxTvibreittRum.setText("Double bed");
+
+        jLabel2.setText("Price Range:");
+
+        jComboBoxPrice.setBackground(new java.awt.Color(255, 255, 255));
+        jComboBoxPrice.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0 - 5000", "5000 - 10000", "10000 - 15000", "20000+" }));
+
+        jLabel3.setText("Stars:");
+
+        jComboBoxStars.setBackground(new java.awt.Color(255, 255, 255));
+        jComboBoxStars.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5" }));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jTextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jXDatePickerCheckIn, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jXDatePickerCheckOut, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(searchButton))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBoxRoomSize, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1)
+                            .addComponent(jCheckBoxTvibreittRum))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBoxPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBoxStars, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))))
+                .addContainerGap(29, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(61, 61, 61)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jXDatePickerCheckIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jXDatePickerCheckOut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(1, 1, 1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1))
+                .addGap(1, 1, 1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBoxRoomSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxStars, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBoxTvibreittRum)
+                .addContainerGap(55, Short.MAX_VALUE))
+        );
+
+        jPanel3.setBackground(new java.awt.Color(75, 119, 190));
+
+        jButtonInnskraning.setBackground(new java.awt.Color(255, 255, 255));
+        jButtonInnskraning.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jButtonInnskraning.setText("Sign in");
         jButtonInnskraning.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonInnskraningActionPerformed(evt);
             }
         });
 
-        jComboBoxRoomSize.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4" }));
+        jButtonMyHotels.setBackground(new java.awt.Color(255, 255, 255));
+        jButtonMyHotels.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jButtonMyHotels.setText("My hotels");
+        jButtonMyHotels.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMyHotelsActionPerformed(evt);
+            }
+        });
 
-        jLabel1.setText("Room size:");
+        jButtonNyskraning.setBackground(new java.awt.Color(255, 255, 255));
+        jButtonNyskraning.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jButtonNyskraning.setText("Register");
+        jButtonNyskraning.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonNyskraningActionPerformed(evt);
+            }
+        });
 
-        jCheckBoxTvibreittRum.setText("Tvíbreitt rúm");
+        jLabelMin.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
+        jLabelMin.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelMin.setText("-");
+        jLabelMin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelMinMouseClicked(evt);
+            }
+        });
 
-        jComboBoxPrice.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0 - 5000", "5000 - 10000", "10000 - 15000", "20000+" }));
+        jLabelExit.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
+        jLabelExit.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelExit.setText("X");
+        jLabelExit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelExitMouseClicked(evt);
+            }
+        });
 
-        jLabel2.setText("Verð");
+        jLabel5.setFont(new java.awt.Font("Lucida Grande", 1, 25)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Hotel Search");
 
-        jLabel4.setText("Check-in:");
-
-        jLabel5.setText("Check-out");
-
-        jLabel6.setText("Nýskráning");
-
-        jButton1.setText("Mínar Síður");
-
-        jComboBoxStars.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5" }));
-
-        jLabel3.setText("Stjörnur");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jButtonNyskraning, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonInnskraning))
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabelMin)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabelExit)
+                        .addGap(12, 12, 12))
+                    .addComponent(jButtonMyHotels, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelMin)
+                    .addComponent(jLabelExit)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButtonInnskraning, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonNyskraning, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonMyHotels, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(searchButton)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jLabelSearch, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addComponent(jLabel3))
-                                .addGap(39, 39, 39)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jXDatePickerCheckIn, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
-                                            .addComponent(jXDatePickerCheckOut, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jComboBoxRoomSize, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jTextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jCheckBoxTvibreittRum))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jComboBoxStars, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jComboBoxPrice, javax.swing.GroupLayout.Alignment.LEADING, 0, 165, Short.MAX_VALUE)))))
-                        .addGap(0, 141, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonInnskraning)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
-                .addContainerGap())
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonInnskraning)
-                    .addComponent(jButton1))
-                .addGap(56, 56, 56)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelSearch)
-                    .addComponent(jTextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jXDatePickerCheckIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jXDatePickerCheckOut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jComboBoxRoomSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBoxTvibreittRum))
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jComboBoxPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBoxStars, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(searchButton)
-                .addContainerGap())
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -199,8 +292,23 @@ public class SearchForm extends javax.swing.JFrame {
         
         String searchString = jTextFieldSearch.getText();
         
+        if(searchString.equals("") || searchString.equals("Location or hotel address")) { // Ef við viljum að það þurfi að leita eftir ákveðnum stað.
+            JOptionPane.showMessageDialog(null, "Search failed! Please put in valid address or hotel.", "Search", JOptionPane.ERROR_MESSAGE);
+            return;
+        } else if(searchString.contains("!") == true || searchString.contains("+") == true || searchString.contains("&") == true ) {
+            JOptionPane.showMessageDialog(null, "Search failed! Please put in valid address or hotel.", "Search", JOptionPane.ERROR_MESSAGE);
+            return;
+        } 
+        
+        
         Date date1 = jXDatePickerCheckIn.getDate();//Skilar dagsetningu. Null ef ekkert er valið
         Date date2 = jXDatePickerCheckOut.getDate();//Skilar dagsetningu. Null ef ekkert er valið
+        
+        if(date1 == null || date2 == null) {
+            JOptionPane.showMessageDialog(null, "Search failed! Please put in valid dates.", "Search", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
         DateFormat oDateFormat = new SimpleDateFormat("dd-MM-yyyy");
         String sDate1 = oDateFormat.format(date1);
         String sDate2 = oDateFormat.format(date2);
@@ -210,17 +318,46 @@ public class SearchForm extends javax.swing.JFrame {
         int price = jComboBoxPrice.getSelectedIndex()+1;//Skilar 1,2,3,4 eða 5. -1 ef ekkert er valið
         int stars = jComboBoxStars.getSelectedIndex()+1;//Skilar 1,2,3,4 eða 5. -1 ef ekkert er valið
         ArrayList<Room> room = search(searchString, date1, date2, roomSize, tvibreitt, price, stars);
-        showRooms(room);
+        //showRooms(room);
+        //ArrayList<Hotel> hotel = getHotel();
+        //ArrayList<Date> dates = getTotalDates();
+        
     }//GEN-LAST:event_searchButtonActionPerformed
 
     private void jButtonInnskraningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInnskraningActionPerformed
-        LoginForm lf = new LoginForm();
-        lf.setVisible(true);
-        lf.pack();
-        lf.setLocationRelativeTo(null);
-        lf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.dispose();
+            LoginForm lgf = new LoginForm();
+            lgf.setVisible(true);
+            lgf.pack();
+            lgf.setLocationRelativeTo(null);
+            lgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            this.dispose();
     }//GEN-LAST:event_jButtonInnskraningActionPerformed
+
+    private void jTextFieldSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldSearchMouseClicked
+        jTextFieldSearch.setText("");
+        jTextFieldSearch.setForeground(Color.darkGray);
+    }//GEN-LAST:event_jTextFieldSearchMouseClicked
+
+    private void jLabelExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelExitMouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_jLabelExitMouseClicked
+
+    private void jLabelMinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelMinMouseClicked
+        this.setState(JFrame.ICONIFIED);
+    }//GEN-LAST:event_jLabelMinMouseClicked
+
+    private void jButtonNyskraningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNyskraningActionPerformed
+        RegisterForm rgf = new RegisterForm();
+        rgf.setVisible(true);
+        rgf.pack();
+        rgf.setLocationRelativeTo(null);
+        rgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();
+    }//GEN-LAST:event_jButtonNyskraningActionPerformed
+
+    private void jButtonMyHotelsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMyHotelsActionPerformed
+        
+    }//GEN-LAST:event_jButtonMyHotelsActionPerformed
     
     private void showRooms(ArrayList<Room> room) {
         for(int i = 0; i < room.size(); i++) {
@@ -264,8 +401,9 @@ public class SearchForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonInnskraning;
+    private javax.swing.JButton jButtonMyHotels;
+    private javax.swing.JButton jButtonNyskraning;
     private javax.swing.JCheckBox jCheckBoxTvibreittRum;
     private javax.swing.JComboBox<String> jComboBoxPrice;
     private javax.swing.JComboBox<String> jComboBoxRoomSize;
@@ -273,11 +411,12 @@ public class SearchForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabelSearch;
+    private javax.swing.JLabel jLabelExit;
+    private javax.swing.JLabel jLabelMin;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField jTextFieldSearch;
     private org.jdesktop.swingx.JXDatePicker jXDatePickerCheckIn;
     private org.jdesktop.swingx.JXDatePicker jXDatePickerCheckOut;
