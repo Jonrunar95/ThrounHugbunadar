@@ -29,7 +29,7 @@ public class HotelReview {
 	public Hotel getHotel() {
 		return hotel;
 	}
-	public void setHotel() {
+	public void setHotel(Hotel hotel) {
 		this.hotel = hotel;
 	}
 	public User getUser() {

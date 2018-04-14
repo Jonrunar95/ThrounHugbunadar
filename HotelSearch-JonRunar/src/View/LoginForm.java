@@ -48,7 +48,7 @@ private JFrame frame;
         jLabel5 = new javax.swing.JLabel();
         jTextFieldUsername = new javax.swing.JTextField();
         jPasswordField = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
+        jButtonHaettaVid = new javax.swing.JButton();
         jButtonLogin = new javax.swing.JButton();
         jLabelRegister = new javax.swing.JLabel();
 
@@ -59,7 +59,7 @@ private JFrame frame;
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Innskráning");
+        jLabel1.setText("Log in");
 
         jLabelMin.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
         jLabelMin.setForeground(new java.awt.Color(255, 255, 255));
@@ -109,11 +109,11 @@ private JFrame frame;
 
         jLabel4.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(236, 240, 241));
-        jLabel4.setText("Notendanafn:");
+        jLabel4.setText("User name:");
 
         jLabel5.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(236, 240, 241));
-        jLabel5.setText("Lykilorð:");
+        jLabel5.setText("Password:");
 
         jTextFieldUsername.setBackground(new java.awt.Color(108, 122, 137));
         jTextFieldUsername.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
@@ -123,15 +123,20 @@ private JFrame frame;
         jPasswordField.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
         jPasswordField.setForeground(new java.awt.Color(228, 241, 254));
 
-        jButton1.setBackground(new java.awt.Color(192, 57, 43));
-        jButton1.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Hætta við");
+        jButtonHaettaVid.setBackground(new java.awt.Color(192, 57, 43));
+        jButtonHaettaVid.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        jButtonHaettaVid.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonHaettaVid.setText("Cancel");
+        jButtonHaettaVid.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonHaettaVidActionPerformed(evt);
+            }
+        });
 
         jButtonLogin.setBackground(new java.awt.Color(34, 167, 240));
         jButtonLogin.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         jButtonLogin.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonLogin.setText("Innskrá");
+        jButtonLogin.setText("Sign in");
         jButtonLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonLoginActionPerformed(evt);
@@ -140,7 +145,7 @@ private JFrame frame;
 
         jLabelRegister.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
         jLabelRegister.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelRegister.setText("Eða ýttu hér til að búa til nýjan aðgang");
+        jLabelRegister.setText("Or press here to create a new account");
         jLabelRegister.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabelRegister.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -153,11 +158,11 @@ private JFrame frame;
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(58, Short.MAX_VALUE)
+                .addContainerGap(66, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabelRegister)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(jButtonHaettaVid)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonLogin))
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -168,7 +173,7 @@ private JFrame frame;
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTextFieldUsername)
                             .addComponent(jPasswordField, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE))))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,7 +188,7 @@ private JFrame frame;
                     .addComponent(jPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonHaettaVid, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelRegister)
@@ -236,19 +241,28 @@ private JFrame frame;
         String password = String.valueOf(charPassword);
         int log = login(username, password);
         if(log == 0) {
-            LoginForm lf = new LoginForm();
-            lf.setVisible(true);
-            lf.pack();
-            lf.setLocationRelativeTo(null);
-            lf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            SearchForm hf = new SearchForm();
+            hf.setVisible(true);
+            hf.pack();
+            hf.setLocationRelativeTo(null);
+            hf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             this.dispose();
         }
         else {
-            JOptionPane.showMessageDialog(null, "Innskráning mistókst", "Innskráning", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Log in failed", "Log in", JOptionPane.ERROR_MESSAGE);
             jTextFieldUsername.setText("");
             jPasswordField.setText("");
         }
     }//GEN-LAST:event_jButtonLoginActionPerformed
+
+    private void jButtonHaettaVidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHaettaVidActionPerformed
+            SearchForm hf = new SearchForm();
+            hf.setVisible(true);
+            hf.pack();
+            hf.setLocationRelativeTo(null);
+            hf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            this.dispose();
+    }//GEN-LAST:event_jButtonHaettaVidActionPerformed
 
     /**
      * @param args the command line arguments
@@ -286,7 +300,7 @@ private JFrame frame;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonHaettaVid;
     private javax.swing.JButton jButtonLogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
