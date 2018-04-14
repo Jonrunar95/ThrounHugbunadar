@@ -6,10 +6,11 @@
 package View;
 
 import Controller.SearchController;
+import static Controller.SearchController.getHotel;
+import static Controller.SearchController.getTotalDates;
 import static Controller.SearchController.search;
+import Model.Hotel;
 import Model.Room;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JFrame;
@@ -77,13 +78,13 @@ public class SearchForm extends javax.swing.JFrame {
             }
         });
 
-        jComboBoxRoomSize.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4" }));
+        jComboBoxRoomSize.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sýna öll", "1", "2", "3", "4" }));
 
         jLabel1.setText("Room size:");
 
         jCheckBoxTvibreittRum.setText("Tvíbreitt rúm");
 
-        jComboBoxPrice.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0 - 5000", "5000 - 10000", "10000 - 15000", "20000+" }));
+        jComboBoxPrice.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sýna öll", "0 - 5000", "5000 - 10000", "10000 - 15000", "20000+" }));
 
         jLabel2.setText("Verð");
 
@@ -95,7 +96,7 @@ public class SearchForm extends javax.swing.JFrame {
 
         jButton1.setText("Mínar Síður");
 
-        jComboBoxStars.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5" }));
+        jComboBoxStars.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sýna öll", "1", "2", "3", "4", "5" }));
 
         jLabel3.setText("Stjörnur");
 
@@ -201,16 +202,22 @@ public class SearchForm extends javax.swing.JFrame {
         
         Date date1 = jXDatePickerCheckIn.getDate();//Skilar dagsetningu. Null ef ekkert er valið
         Date date2 = jXDatePickerCheckOut.getDate();//Skilar dagsetningu. Null ef ekkert er valið
-        DateFormat oDateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        String sDate1 = oDateFormat.format(date1);
-        String sDate2 = oDateFormat.format(date2);
-        int roomSize = jComboBoxRoomSize.getSelectedIndex()+1;//Skilar 1,2,3 eða 4. -1 ef ekkert er valið
+        int roomSize = jComboBoxRoomSize.getSelectedIndex();//Skilar 0, 1,2,3 eða 4. 0 ef allt er valið
         boolean tvibreitt = jCheckBoxTvibreittRum.isSelected();
 
-        int price = jComboBoxPrice.getSelectedIndex()+1;//Skilar 1,2,3,4 eða 5. -1 ef ekkert er valið
-        int stars = jComboBoxStars.getSelectedIndex()+1;//Skilar 1,2,3,4 eða 5. -1 ef ekkert er valið
+        int price = jComboBoxPrice.getSelectedIndex();//Skilar 0, 1,2,3,4 eða 5. 0 ef allt er valið
+        int stars = jComboBoxStars.getSelectedIndex();//Skilar 0, 1,2,3,4 eða 5. 0 ef allt er valið
         ArrayList<Room> room = search(searchString, date1, date2, roomSize, tvibreitt, price, stars);
         showRooms(room);
+        ArrayList<Hotel> hotel = getHotel();
+        ArrayList<Date> dates = getTotalDates();
+        
+        HotelForm hf = new HotelForm(room, hotel, dates);
+        hf.setVisible(true);
+        hf.pack();
+        hf.setLocationRelativeTo(null);
+        hf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();
     }//GEN-LAST:event_searchButtonActionPerformed
 
     private void jButtonInnskraningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInnskraningActionPerformed

@@ -1,11 +1,6 @@
 package View;
 
 import static Controller.LoginController.login;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import javax.swing.JFrame;
 
 import java.util.logging.Level;
@@ -241,11 +236,11 @@ private JFrame frame;
         String password = String.valueOf(charPassword);
         int log = login(username, password);
         if(log == 0) {
-            HotelForm hf = new HotelForm();
-            hf.setVisible(true);
-            hf.pack();
-            hf.setLocationRelativeTo(null);
-            hf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            LoginForm lf = new LoginForm();
+            lf.setVisible(true);
+            lf.pack();
+            lf.setLocationRelativeTo(null);
+            lf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             this.dispose();
         }
         else {

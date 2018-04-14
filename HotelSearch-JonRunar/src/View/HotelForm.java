@@ -3,6 +3,7 @@ package View;
 import Model.Hotel;
 import Model.Room;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -18,14 +19,18 @@ import javax.swing.JLabel;
  * @author alex
  */
 public class HotelForm extends javax.swing.JFrame {
-    private ArrayList<Room> herbergi;
-    private ArrayList<Hotel> hotel;
+    private static ArrayList<Room> herbergi;
+    private static ArrayList<Hotel> hotel;
+    private static ArrayList<Date> dates;
     private int sida;
     /**
      * Creates new form HotelForm
      */
-    public HotelForm() {
+    public HotelForm(ArrayList<Room> room, ArrayList<Hotel> hotel, ArrayList<Date> dates) {
         initComponents();
+        this.herbergi = room;
+        this.hotel = hotel;
+        this.dates = dates;
         sida = 1;
         fyrra.setEnabled(false);
         stillaSidu();
@@ -306,7 +311,7 @@ public class HotelForm extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new HotelForm().setVisible(true);
+                new HotelForm(herbergi, hotel, dates).setVisible(true);
             }
         });
     }
