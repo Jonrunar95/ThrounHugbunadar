@@ -25,12 +25,15 @@ public class HotelForm extends javax.swing.JFrame {
     private int sida;
     /**
      * Creates new form HotelForm
+     * @param room
+     * @param hotel
+     * @param dates
      */
     public HotelForm(ArrayList<Room> room, ArrayList<Hotel> hotel, ArrayList<Date> dates) {
         initComponents();
-        this.herbergi = room;
-        this.hotel = hotel;
-        this.dates = dates;
+        HotelForm.herbergi = room;
+        HotelForm.hotel = hotel;
+        HotelForm.dates = dates;
         sida = 1;
         fyrra.setEnabled(false);
         stillaSidu();
