@@ -5,8 +5,14 @@
  */
 package View;
 
+import Model.Hotel;
 import Model.Room;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
 
 /**
  *
@@ -14,22 +20,23 @@ import java.util.ArrayList;
  */
 public class RoomForm extends javax.swing.JFrame {
     
-    private ArrayList<Room> herbergi;
+    private static ArrayList<Room> room;
+    private static ArrayList<Hotel> hotel;
+    private static ArrayList<Date> dates;
     private int sida;
     
     /**
      * Creates new form RoomForm
      */
-    public RoomForm() {
+    public RoomForm(ArrayList<Room> room, ArrayList<Hotel> hotel, ArrayList<Date> dates) {
         initComponents();
+        RoomForm.room = room;
+        RoomForm.hotel = hotel;
+        RoomForm.dates = dates;
         sida = 1;
         prevButton.setEnabled(false);
         doubleCheckBox.setEnabled(false);
         stillaSidu();
-    }
-    
-    public void setHerbergi(ArrayList<Room> herbergi) {
-        this.herbergi = herbergi;
     }
     
     /**
@@ -41,39 +48,86 @@ public class RoomForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabelHotelNafn = new javax.swing.JLabel();
+        jLabelExit = new javax.swing.JLabel();
+        jLabelMin = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         myndLabel = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        fjoldiLabel = new javax.swing.JLabel();
+        priceLabel = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         doubleCheckBox = new javax.swing.JCheckBox();
-        jLabel4 = new javax.swing.JLabel();
-        priceLabel = new javax.swing.JLabel();
-        nrLabel = new javax.swing.JLabel();
-        cancelButton = new javax.swing.JButton();
+        fjoldiLabel = new javax.swing.JLabel();
         nextButton = new javax.swing.JButton();
         prevButton = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
         resButton = new javax.swing.JButton();
+        nrLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
-        jLabel1.setText("Room size (persons):");
+        jPanel1.setBackground(new java.awt.Color(75, 119, 190));
 
-        fjoldiLabel.setText("fjoldi");
+        jLabelHotelNafn.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        jLabelHotelNafn.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelHotelNafn.setText("hotelNafn");
 
-        jLabel3.setText("Double sized bed:");
+        jLabelExit.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
+        jLabelExit.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelExit.setText("X");
+        jLabelExit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelExitMouseClicked(evt);
+            }
+        });
+
+        jLabelMin.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
+        jLabelMin.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelMin.setText("-");
+        jLabelMin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelMinMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelHotelNafn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelMin)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabelExit)
+                .addGap(12, 12, 12))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelHotelNafn)
+                    .addComponent(jLabelExit)
+                    .addComponent(jLabelMin))
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+
+        jPanel2.setBackground(new java.awt.Color(228, 241, 254));
 
         jLabel4.setText("Price of Room:");
 
+        jLabel1.setText("Room size (persons):");
+
         priceLabel.setText("verd");
 
-        nrLabel.setText("3/4");
+        jLabel3.setText("Double sized bed:");
 
-        cancelButton.setText("Cancel");
-        cancelButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelButtonActionPerformed(evt);
-            }
-        });
+        fjoldiLabel.setText("fjoldi");
 
         nextButton.setText("Next");
         nextButton.addActionListener(new java.awt.event.ActionListener() {
@@ -89,6 +143,13 @@ public class RoomForm extends javax.swing.JFrame {
             }
         });
 
+        cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
+
         resButton.setText("Reserve");
         resButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,74 +157,87 @@ public class RoomForm extends javax.swing.JFrame {
             }
         });
 
+        nrLabel.setText("3/4");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(myndLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(27, 27, 27)
+                                .addComponent(doubleCheckBox))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel4))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(priceLabel)
+                                    .addComponent(fjoldiLabel)))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(resButton)
+                        .addGap(63, 63, 63)
+                        .addComponent(cancelButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(prevButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nextButton, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nrLabel)))
+                .addContainerGap(7, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(myndLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel4)
+                                    .addComponent(priceLabel))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel1)
+                                    .addComponent(fjoldiLabel))
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel3))
+                            .addComponent(doubleCheckBox, javax.swing.GroupLayout.Alignment.TRAILING))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(resButton)
+                    .addComponent(cancelButton)
+                    .addComponent(prevButton)
+                    .addComponent(nextButton)
+                    .addComponent(nrLabel))
+                .addGap(10, 10, 10))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(nrLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(myndLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(36, 36, 36)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(fjoldiLabel)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(doubleCheckBox))
-                            .addComponent(jLabel3)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(priceLabel)
-                        .addContainerGap())))
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(resButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(prevButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(nextButton, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cancelButton)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(myndLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
-                        .addComponent(nrLabel))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(fjoldiLabel)
-                        .addGap(19, 19, 19)
-                        .addComponent(jLabel3)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(doubleCheckBox))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(32, 32, 32)
-                                .addComponent(jLabel4)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(priceLabel)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cancelButton)
-                    .addComponent(nextButton)
-                    .addComponent(prevButton)
-                    .addComponent(resButton))
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -187,6 +261,14 @@ public class RoomForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         naestaSida();
     }//GEN-LAST:event_nextButtonActionPerformed
+
+    private void jLabelExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelExitMouseClicked
+        this.dispose();
+    }//GEN-LAST:event_jLabelExitMouseClicked
+
+    private void jLabelMinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelMinMouseClicked
+        this.setState(JFrame.ICONIFIED);
+    }//GEN-LAST:event_jLabelMinMouseClicked
 
     /**
      * @param args the command line arguments
@@ -218,7 +300,7 @@ public class RoomForm extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RoomForm().setVisible(true);
+                new RoomForm(room, hotel, dates).setVisible(true);
             }
         });
     }
@@ -230,6 +312,11 @@ public class RoomForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabelExit;
+    private javax.swing.JLabel jLabelHotelNafn;
+    private javax.swing.JLabel jLabelMin;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel myndLabel;
     private javax.swing.JButton nextButton;
     private javax.swing.JLabel nrLabel;
@@ -244,26 +331,26 @@ public class RoomForm extends javax.swing.JFrame {
         stillaDouble();
         stillaPrice();
         stillaNR();
+        stillaHotelNafn();
     }
 
     private void stillaSize() {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        fjoldiLabel.setText(String.valueOf(herbergi.get(sida-1).getSize()));
+        
+        
+        fjoldiLabel.setText(String.valueOf(room.get(sida-1).getSize()));
     }
 
     private void stillaDouble() {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        doubleCheckBox.setSelected(herbergi.get(sida-1).isTvibreitt());
+        doubleCheckBox.setSelected(room.get(sida-1).isTvibreitt());
     }
 
     private void stillaPrice() {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        priceLabel.setText(String.valueOf(herbergi.get(sida-1).getPrice()));
+        priceLabel.setText(String.valueOf(room.get(sida-1).getPrice()) + " kr/night");
     }
 
     private void stillaNR() {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        nrLabel.setText(sida + "/" + herbergi.size());
+        nrLabel.setText(sida + "/" + room.size());
     }
 
     private void fyrriSida() {
@@ -276,8 +363,14 @@ public class RoomForm extends javax.swing.JFrame {
     private void naestaSida() {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         sida++;
-        if(sida==herbergi.size()) nextButton.setEnabled(false);
+        if(sida==room.size()) nextButton.setEnabled(false);
         if(sida==2) prevButton.setEnabled(true);
         stillaSidu();
+    }
+
+    private void stillaHotelNafn() {
+        Hotel theHotel = hotel.get(sida-1);
+        String name = theHotel.getName();
+        jLabelHotelNafn.setText(name);
     }
 }

@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 
@@ -54,11 +55,12 @@ public final class HotelForm extends javax.swing.JFrame {
         if(hotel == null) throw new IllegalArgumentException("Upphafstilla þarf hótel!");
         else {
             stillaConv();
-            stillaMynd();
+            //stillaMynd();
             stillaNafn();
             stillaStjornur();
             stillaStads();
             stillaNR();
+            stillaAvailableRooms();
         }
     }
     private void stillaNR() {
@@ -66,7 +68,7 @@ public final class HotelForm extends javax.swing.JFrame {
     }
     
     private void stillaMynd() throws MalformedURLException, IOException {
-        Hotel theHotel = hotel.get(sida);
+        Hotel theHotel = hotel.get(sida-1);
         String photo = theHotel.getPhoto_URL();
         URL url = new URL(photo);
         Image image = ImageIO.read(url);
@@ -74,13 +76,13 @@ public final class HotelForm extends javax.swing.JFrame {
     }
     
     private void stillaStads() {
-        Hotel theHotel = hotel.get(sida);
+        Hotel theHotel = hotel.get(sida-1);
         String stads = theHotel.getLocation();
         nafnStadsetning.setText(stads);
     }
     
     private void stillaStjornur() {
-        Hotel theHotel = hotel.get(sida);
+        Hotel theHotel = hotel.get(sida-1);
         int stars = theHotel.getStars();
         if(stars == 1) {
             hotelStjornur.setText("*");
@@ -96,13 +98,13 @@ public final class HotelForm extends javax.swing.JFrame {
     }
     
     private void stillaNafn() {
-        Hotel theHotel = hotel.get(sida);
+        Hotel theHotel = hotel.get(sida-1);
         String name = theHotel.getName();
         heitiHotel.setText(name);
     }
     
     private void stillaConv() {
-        Hotel theHotel = hotel.get(sida);
+        Hotel theHotel = hotel.get(sida-1);
         String[] convinience = theHotel.getConveniences();
         for(int i = 0; i < convinience.length; i++) {
             if(i == 0) {
@@ -139,6 +141,8 @@ public final class HotelForm extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         heitiHotel = new javax.swing.JLabel();
+        jLabelExit = new javax.swing.JLabel();
+        jLabelMin = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         skodaHerb = new javax.swing.JButton();
         stadsSida = new javax.swing.JLabel();
@@ -161,14 +165,35 @@ public final class HotelForm extends javax.swing.JFrame {
         stjornur = new javax.swing.JLabel();
         hotelStjornur = new javax.swing.JLabel();
         conv9 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        RoomsNumber = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(null);
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(75, 119, 190));
 
         heitiHotel.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        heitiHotel.setForeground(new java.awt.Color(255, 255, 255));
         heitiHotel.setText("heitiHotel");
+
+        jLabelExit.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
+        jLabelExit.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelExit.setText("X");
+        jLabelExit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelExitMouseClicked(evt);
+            }
+        });
+
+        jLabelMin.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
+        jLabelMin.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelMin.setText("-");
+        jLabelMin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelMinMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -177,18 +202,22 @@ public final class HotelForm extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(heitiHotel)
-                .addContainerGap(373, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelMin)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabelExit)
+                .addGap(12, 12, 12))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(heitiHotel)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(heitiHotel)
+                    .addComponent(jLabelExit)
+                    .addComponent(jLabelMin))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
-
-        getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 470, 60);
 
         jPanel2.setBackground(new java.awt.Color(228, 241, 254));
 
@@ -226,31 +255,15 @@ public final class HotelForm extends javax.swing.JFrame {
 
         nafnStadsetning.setText("nafnStadsetning");
 
-        conv1.setText("conv3");
-
-        conv0.setText("conv1");
-
         conv.setText("Conveniences:");
-
-        conv3.setText("conv2");
-
-        conv4.setText("conv4");
-
-        conv2.setText("conv5");
-
-        conv5.setText("conv6");
-
-        conv6.setText("conv7");
-
-        conv7.setText("conv8");
-
-        conv8.setText("conv9");
 
         stjornur.setText("Stars:");
 
         hotelStjornur.setText("hotelStjornur");
 
-        conv9.setText("conv0");
+        jLabel1.setText("Available rooms:");
+
+        RoomsNumber.setText("number");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -258,50 +271,57 @@ public final class HotelForm extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addComponent(stadsSida)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(skodaHerb)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(haettaVid)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(fyrra)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(naesta)
-                .addContainerGap(8, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(myndLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(conv7)
-                        .addGap(18, 18, 18)
-                        .addComponent(conv8))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(stadsetning)
-                            .addComponent(stjornur, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(RoomsNumber))
+                            .addComponent(myndLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(47, 47, 47)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(hotelStjornur)
-                            .addComponent(nafnStadsetning)))
-                    .addComponent(conv)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(conv7)
+                                .addGap(18, 18, 18)
+                                .addComponent(conv8))
+                            .addComponent(conv)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(conv9)
+                                .addGap(18, 18, 18)
+                                .addComponent(conv0)
+                                .addGap(18, 18, 18)
+                                .addComponent(conv3)
+                                .addGap(18, 18, 18)
+                                .addComponent(conv1))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(conv4)
+                                .addGap(18, 18, 18)
+                                .addComponent(conv2)
+                                .addGap(18, 18, 18)
+                                .addComponent(conv5)
+                                .addGap(18, 18, 18)
+                                .addComponent(conv6))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(stadsetning)
+                                    .addComponent(stjornur, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(hotelStjornur)
+                                    .addComponent(nafnStadsetning))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(conv9)
-                        .addGap(18, 18, 18)
-                        .addComponent(conv0)
-                        .addGap(18, 18, 18)
-                        .addComponent(conv3)
-                        .addGap(18, 18, 18)
-                        .addComponent(conv1))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(conv4)
-                        .addGap(18, 18, 18)
-                        .addComponent(conv2)
-                        .addGap(18, 18, 18)
-                        .addComponent(conv5)
-                        .addGap(18, 18, 18)
-                        .addComponent(conv6)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(stadsSida)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(skodaHerb)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(haettaVid)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                        .addComponent(fyrra)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(naesta)
+                        .addContainerGap(15, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -335,9 +355,13 @@ public final class HotelForm extends javax.swing.JFrame {
                     .addComponent(conv6))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(RoomsNumber))
+                .addGap(2, 2, 2)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(conv7)
                     .addComponent(conv8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(skodaHerb)
                     .addComponent(stadsSida)
@@ -347,8 +371,20 @@ public final class HotelForm extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        getContentPane().add(jPanel2);
-        jPanel2.setBounds(0, 60, 460, 310);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -377,8 +413,20 @@ public final class HotelForm extends javax.swing.JFrame {
     }//GEN-LAST:event_haettaVidActionPerformed
 
     private void skodaHerbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_skodaHerbActionPerformed
-        // TODO add your handling code here:
+        RoomForm rf = new RoomForm(herbergi, hotel, dates);
+        rf.setVisible(true);
+        rf.pack();
+        rf.setLocationRelativeTo(null);
+        rf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }//GEN-LAST:event_skodaHerbActionPerformed
+
+    private void jLabelExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelExitMouseClicked
+        this.dispose();
+    }//GEN-LAST:event_jLabelExitMouseClicked
+
+    private void jLabelMinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelMinMouseClicked
+        this.setState(JFrame.ICONIFIED);
+    }//GEN-LAST:event_jLabelMinMouseClicked
 
     /**
      * @param args the command line arguments
@@ -420,6 +468,7 @@ public final class HotelForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel RoomsNumber;
     private javax.swing.JLabel conv;
     private javax.swing.JLabel conv0;
     private javax.swing.JLabel conv1;
@@ -435,6 +484,9 @@ public final class HotelForm extends javax.swing.JFrame {
     private javax.swing.JButton haettaVid;
     private javax.swing.JLabel heitiHotel;
     private javax.swing.JLabel hotelStjornur;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabelExit;
+    private javax.swing.JLabel jLabelMin;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel myndLabel;
@@ -457,6 +509,11 @@ public final class HotelForm extends javax.swing.JFrame {
         sida--;
         if(sida==1) fyrra.setEnabled(false);
         stillaSidu();
+    }
+
+    private void stillaAvailableRooms() {
+        Hotel theHotel = hotel.get(sida-1);
+        RoomsNumber.setText(Integer.toString(herbergi.size()));
     }
 
 }

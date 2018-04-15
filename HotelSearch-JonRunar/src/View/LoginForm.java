@@ -22,12 +22,21 @@ import java.awt.event.WindowEvent;
 public class LoginForm extends javax.swing.JFrame {
 
 private JFrame frame;
+private boolean loggedIn;
+
+
+
     /**
      * Creates new form LoginForm
      */
     public LoginForm() {
         initComponents();
         this.setLocationRelativeTo(null); // center form in the screen
+        loggedIn = false;
+    }
+
+    public boolean isLoggedIn() {
+        return loggedIn;
     }
 
     /**
@@ -241,7 +250,11 @@ private JFrame frame;
         String password = String.valueOf(charPassword);
         int log = login(username, password);
         if(log == 0) {
+<<<<<<< HEAD
+            SearchForm hf = new SearchForm(true);
+=======
             SearchForm hf = new SearchForm();
+>>>>>>> e78b2883b5e0b3b4a562cdb8b2579fef09c8910f
             hf.setVisible(true);
             hf.pack();
             hf.setLocationRelativeTo(null);
@@ -256,7 +269,7 @@ private JFrame frame;
     }//GEN-LAST:event_jButtonLoginActionPerformed
 
     private void jButtonHaettaVidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHaettaVidActionPerformed
-            SearchForm hf = new SearchForm();
+            SearchForm hf = new SearchForm(false);
             hf.setVisible(true);
             hf.pack();
             hf.setLocationRelativeTo(null);
