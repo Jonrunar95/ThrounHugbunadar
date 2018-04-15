@@ -6,14 +6,19 @@
 package View;
 
 import Controller.SearchController;
+import static Controller.SearchController.getHotel;
+import static Controller.SearchController.getTotalDates;
 import static Controller.SearchController.search;
 import Model.Hotel;
 import Model.Room;
 import java.awt.Color;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -25,12 +30,26 @@ public class SearchForm extends javax.swing.JFrame {
 
     boolean checkBoxes[];
     private SearchController search;
+    //private LoginForm lf = new LoginForm();
     /**
      * Creates new form SearchController
      */
-    public SearchForm() {
+    public SearchForm(boolean isLoggedIn) {
+        
         initComponents();
-        this.setLocationRelativeTo(null); // center form in the scree
+        this.setLocationRelativeTo(null); // center form in the screen
+        
+        if(isLoggedIn == true) { // Ef notandin er búinn að logga sig inn
+            jButtonMyHotels.setVisible(true);
+            jButtonInnskraning.setVisible(false);
+            jButtonNyskraning.setVisible(false);
+            jButtonLogOut.setVisible(true);
+        }else {
+            jButtonMyHotels.setVisible(false);
+            jButtonLogOut.setVisible(false);
+            jButtonInnskraning.setVisible(true);
+            jButtonNyskraning.setVisible(true);
+        }
     }
     
     
@@ -64,6 +83,7 @@ public class SearchForm extends javax.swing.JFrame {
         jLabelMin = new javax.swing.JLabel();
         jLabelExit = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jButtonLogOut = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -157,11 +177,12 @@ public class SearchForm extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(61, 61, 61)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jXDatePickerCheckIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jXDatePickerCheckOut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jXDatePickerCheckIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jXDatePickerCheckOut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(1, 1, 1)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -228,6 +249,17 @@ public class SearchForm extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Hotel Search");
 
+        jButtonLogOut.setBackground(new java.awt.Color(255, 255, 255));
+        jButtonLogOut.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jButtonLogOut.setText("Log out");
+        jButtonLogOut.setMaximumSize(new java.awt.Dimension(95, 47));
+        jButtonLogOut.setMinimumSize(new java.awt.Dimension(95, 47));
+        jButtonLogOut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLogOutActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -247,7 +279,10 @@ public class SearchForm extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabelExit)
                         .addGap(12, 12, 12))
-                    .addComponent(jButtonMyHotels, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jButtonLogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonMyHotels)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -263,7 +298,8 @@ public class SearchForm extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButtonInnskraning, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButtonNyskraning, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButtonMyHotels, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButtonMyHotels, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonLogOut, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -303,6 +339,7 @@ public class SearchForm extends javax.swing.JFrame {
         
         Date date1 = jXDatePickerCheckIn.getDate();//Skilar dagsetningu. Null ef ekkert er valið
         Date date2 = jXDatePickerCheckOut.getDate();//Skilar dagsetningu. Null ef ekkert er valið
+        int roomSize = jComboBoxRoomSize.getSelectedIndex();//Skilar 0, 1,2,3 eða 4. 0 ef allt er valið
         
         if(date1 == null || date2 == null) {
             JOptionPane.showMessageDialog(null, "Search failed! Please put in valid dates.", "Search", JOptionPane.ERROR_MESSAGE);
@@ -312,16 +349,26 @@ public class SearchForm extends javax.swing.JFrame {
         DateFormat oDateFormat = new SimpleDateFormat("dd-MM-yyyy");
         String sDate1 = oDateFormat.format(date1);
         String sDate2 = oDateFormat.format(date2);
-        int roomSize = jComboBoxRoomSize.getSelectedIndex()+1;//Skilar 1,2,3 eða 4. -1 ef ekkert er valið
         boolean tvibreitt = jCheckBoxTvibreittRum.isSelected();
 
-        int price = jComboBoxPrice.getSelectedIndex()+1;//Skilar 1,2,3,4 eða 5. -1 ef ekkert er valið
-        int stars = jComboBoxStars.getSelectedIndex()+1;//Skilar 1,2,3,4 eða 5. -1 ef ekkert er valið
+        int price = jComboBoxPrice.getSelectedIndex();//Skilar 0, 1,2,3,4 eða 5. 0 ef allt er valið
+        int stars = jComboBoxStars.getSelectedIndex();//Skilar 0, 1,2,3,4 eða 5. 0 ef allt er valið
         ArrayList<Room> room = search(searchString, date1, date2, roomSize, tvibreitt, price, stars);
-        //showRooms(room);
-        //ArrayList<Hotel> hotel = getHotel();
-        //ArrayList<Date> dates = getTotalDates();
+        showRooms(room);
+        ArrayList<Hotel> hotel = getHotel();
+        ArrayList<Date> dates = getTotalDates();
         
+        HotelForm hf;
+        try {
+            hf = new HotelForm(room, hotel, dates);
+            hf.setVisible(true);
+            hf.pack();
+            hf.setLocationRelativeTo(null);
+            hf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            //this.dispose();
+        } catch (IOException ex) {
+            Logger.getLogger(SearchForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_searchButtonActionPerformed
 
     private void jButtonInnskraningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInnskraningActionPerformed
@@ -358,6 +405,15 @@ public class SearchForm extends javax.swing.JFrame {
     private void jButtonMyHotelsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMyHotelsActionPerformed
         
     }//GEN-LAST:event_jButtonMyHotelsActionPerformed
+
+    private void jButtonLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogOutActionPerformed
+        SearchForm sf = new SearchForm(false);
+        sf.setVisible(true);
+        sf.pack();
+        sf.setLocationRelativeTo(null);
+        sf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();
+    }//GEN-LAST:event_jButtonLogOutActionPerformed
     
     private void showRooms(ArrayList<Room> room) {
         for(int i = 0; i < room.size(); i++) {
@@ -395,13 +451,14 @@ public class SearchForm extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SearchForm().setVisible(true);
+                new SearchForm(false).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonInnskraning;
+    private javax.swing.JButton jButtonLogOut;
     private javax.swing.JButton jButtonMyHotels;
     private javax.swing.JButton jButtonNyskraning;
     private javax.swing.JCheckBox jCheckBoxTvibreittRum;

@@ -1,11 +1,6 @@
 package View;
 
 import static Controller.LoginController.login;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import javax.swing.JFrame;
 
 import java.util.logging.Level;
@@ -27,12 +22,21 @@ import java.awt.event.WindowEvent;
 public class LoginForm extends javax.swing.JFrame {
 
 private JFrame frame;
+private boolean loggedIn;
+
+
+
     /**
      * Creates new form LoginForm
      */
     public LoginForm() {
         initComponents();
         this.setLocationRelativeTo(null); // center form in the screen
+        loggedIn = false;
+    }
+
+    public boolean isLoggedIn() {
+        return loggedIn;
     }
 
     /**
@@ -246,7 +250,7 @@ private JFrame frame;
         String password = String.valueOf(charPassword);
         int log = login(username, password);
         if(log == 0) {
-            SearchForm hf = new SearchForm();
+            SearchForm hf = new SearchForm(true);
             hf.setVisible(true);
             hf.pack();
             hf.setLocationRelativeTo(null);
@@ -261,7 +265,7 @@ private JFrame frame;
     }//GEN-LAST:event_jButtonLoginActionPerformed
 
     private void jButtonHaettaVidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHaettaVidActionPerformed
-            SearchForm hf = new SearchForm();
+            SearchForm hf = new SearchForm(false);
             hf.setVisible(true);
             hf.pack();
             hf.setLocationRelativeTo(null);

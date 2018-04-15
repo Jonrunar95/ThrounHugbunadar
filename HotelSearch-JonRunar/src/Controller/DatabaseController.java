@@ -24,7 +24,13 @@ import javax.swing.JOptionPane;
  * @author Notandi
  */
 public class DatabaseController {
-    
+
+    /**
+     *
+     * @param searchString
+     * @param query
+     * @return
+     */
     public static ArrayList<Hotel> createHotels(String searchString, String query) {
         ArrayList<Hotel> hotel = new ArrayList<>();
         Connection connection = null;
@@ -70,6 +76,13 @@ public class DatabaseController {
         ArrayList<Room> room = new ArrayList<>();
         Connection connection = null;
         try {
+            String conv ="";
+            if(size != 0) {
+                conv = " AND Start = " + size;
+            }
+            if (tvibreitt == true) {
+                conv = "AND tvibreitt = true";
+            }
             connection = DriverManager.getConnection("jdbc:sqlite:C:/Users/Notandi/Documents/Skóli/Þróun Hugbúnaðar/ThrounHugbunadar/Hoteldb.db");
             Statement statement = connection.createStatement();
             statement.setQueryTimeout(30);
@@ -83,7 +96,7 @@ public class DatabaseController {
                     int roomSize = Integer.parseInt(rs.getString("size"));
                     boolean roomTvibreitt = rs.getBoolean("tvibreitt");
                     double roomPrice = Double.parseDouble(rs.getString("price"));
-                    if(size == roomSize && tvibreitt == roomTvibreitt && roomPrice >= price1 && roomPrice < price2) {
+                    if((roomPrice >= price1 && roomPrice < price2) || price2 == 0) {
                         Room temp = new Room(roomId, roomSize, roomTvibreitt, roomPrice, hotel.get(i));
                         room.add(temp);
                     }
@@ -109,7 +122,7 @@ public class DatabaseController {
         return room;
     }
 
-    static String getUsernames(String username) {
+    public static String getUsernames(String username) {
         String s = "";
         Connection connection = null;
         try {
@@ -140,7 +153,7 @@ public class DatabaseController {
         return s;
     }
     
-    static boolean isDateReserved(ArrayList<Date> dates, int roomId) {
+    public static boolean isDateReserved(ArrayList<Date> dates, int roomId) {
         Connection connection = null;
         boolean isReserved = true;
         try {
@@ -173,7 +186,36 @@ public class DatabaseController {
         }
         return isReserved;
     }
-    static int registerDatabase(String query) {
+    
+    public static void reserveDate(String date, String userId, String roomId) {
+        Connection connection = null;
+        try {
+            connection =  DriverManager.getConnection("jdbc:sqlite:C:/Users/Notandi/Documents/Skóli/Þróun Hugbúnaðar/ThrounHugbunadar/Hoteldb.db");
+            Statement statement = connection.createStatement();
+            statement.setQueryTimeout(30);
+            String query = "INSERT INTO Reservation(roomId, userId, date) VALUES (" + roomId + ", " + userId +", " + date + ")";
+            statement.executeUpdate(query);
+        } 
+        catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.toString());
+        }
+        finally
+        {
+          try
+          {
+            if(connection != null)
+              connection.close();
+          }
+          catch(SQLException e)
+          {
+            // connection close failed.
+            System.err.println(e);
+            
+          }
+        }
+    }
+    
+    public static int registerDatabase(String query) {
         int executeUpdate = 0;
         try {
             Connection connection =  DriverManager.getConnection("jdbc:sqlite:C:/Users/Notandi/Documents/Skóli/Þróun Hugbúnaðar/ThrounHugbunadar/Hoteldb.db");
@@ -186,7 +228,7 @@ public class DatabaseController {
         return executeUpdate;
     }
 
-    static int loginDatabase(String username, String password) {
+    public static int loginDatabase(String username, String password) {
         Connection connection = null;
         int log = 1;
         try {    
