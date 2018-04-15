@@ -126,6 +126,18 @@ public class SearchForm extends javax.swing.JFrame {
             }
         });
 
+<<<<<<< HEAD
+=======
+        jComboBoxRoomSize.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sýna öll", "1", "2", "3", "4" }));
+
+        jLabel1.setText("Room size:");
+
+        jCheckBoxTvibreittRum.setText("Tvíbreitt rúm");
+
+        jComboBoxPrice.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sýna öll", "0 - 5000", "5000 - 10000", "10000 - 15000", "20000+" }));
+
+        jLabel2.setText("Verð");
+>>>>>>> e78b2883b5e0b3b4a562cdb8b2579fef09c8910f
         jLabel1.setText("Room size:");
 
         jComboBoxRoomSize.setBackground(new java.awt.Color(255, 255, 255));
@@ -140,6 +152,10 @@ public class SearchForm extends javax.swing.JFrame {
 
         jLabel3.setText("Stars:");
 
+<<<<<<< HEAD
+=======
+        jComboBoxStars.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sýna öll", "1", "2", "3", "4", "5" }));
+>>>>>>> e78b2883b5e0b3b4a562cdb8b2579fef09c8910f
         jComboBoxStars.setBackground(new java.awt.Color(255, 255, 255));
         jComboBoxStars.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5" }));
 
@@ -365,7 +381,11 @@ public class SearchForm extends javax.swing.JFrame {
             hf.pack();
             hf.setLocationRelativeTo(null);
             hf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+<<<<<<< HEAD
             //this.dispose();
+=======
+            this.dispose();
+>>>>>>> e78b2883b5e0b3b4a562cdb8b2579fef09c8910f
         } catch (IOException ex) {
             Logger.getLogger(SearchForm.class.getName()).log(Level.SEVERE, null, ex);
         }

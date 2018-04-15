@@ -250,7 +250,11 @@ private boolean loggedIn;
         String password = String.valueOf(charPassword);
         int log = login(username, password);
         if(log == 0) {
+<<<<<<< HEAD
             SearchForm hf = new SearchForm(true);
+=======
+            SearchForm hf = new SearchForm();
+>>>>>>> e78b2883b5e0b3b4a562cdb8b2579fef09c8910f
             hf.setVisible(true);
             hf.pack();
             hf.setLocationRelativeTo(null);
