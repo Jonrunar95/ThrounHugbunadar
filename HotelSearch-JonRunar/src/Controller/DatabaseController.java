@@ -24,6 +24,7 @@ import javax.swing.JOptionPane;
  * @author Notandi
  */
 public class DatabaseController {
+    public static final String DB_URL = "jdbc:sqlite:C:/Users/Notandi/Documents/Skóli/Þróun Hugbúnaðar/ThrounHugbunadar/Hoteldb.db";
 
     /**
      *
@@ -35,7 +36,7 @@ public class DatabaseController {
         ArrayList<Hotel> hotel = new ArrayList<>();
         Connection connection = null;
         try {
-            connection = DriverManager.getConnection("jdbc:sqlite:/Users/athh15/Downloads/ThrounHugbunadar-master/Hoteldb.db");
+            connection = DriverManager.getConnection(DB_URL);
             Statement statement = connection.createStatement();
             statement.setQueryTimeout(30);
             String q = "SELECT * from Hotel where location like '%" + searchString + "%'" + query;
@@ -83,7 +84,7 @@ public class DatabaseController {
             if (tvibreitt == true) {
                 conv = "AND tvibreitt = true";
             }
-            connection = DriverManager.getConnection("jdbc:sqlite:/Users/athh15/Downloads/ThrounHugbunadar-master/Hoteldb.db");
+            connection = DriverManager.getConnection(DB_URL);
             Statement statement = connection.createStatement();
             statement.setQueryTimeout(30);
             for(int i = 0; i<hotel.size(); i++ ) { 
@@ -126,7 +127,7 @@ public class DatabaseController {
         String s = "";
         Connection connection = null;
         try {
-            connection =  DriverManager.getConnection("jdbc:sqlite:/Users/athh15/Downloads/ThrounHugbunadar-master/Hoteldb.db");
+            connection =  DriverManager.getConnection(DB_URL);
             Statement statement = connection.createStatement();
             statement.setQueryTimeout(30);
             String searchForUser = "SELECT * from User where name = '" + username + "'";
@@ -157,7 +158,7 @@ public class DatabaseController {
         Connection connection = null;
         boolean isReserved = true;
         try {
-            connection =  DriverManager.getConnection("jdbc:sqlite:/Users/athh15/Downloads/ThrounHugbunadar-master/Hoteldb.db");
+            connection =  DriverManager.getConnection(DB_URL);
             Statement statement = connection.createStatement();
             statement.setQueryTimeout(30);
             for(int i = 0; i<dates.size(); i++) {
@@ -190,7 +191,7 @@ public class DatabaseController {
     public static void reserveDate(String date, String userId, String roomId) {
         Connection connection = null;
         try {
-            connection =  DriverManager.getConnection("jdbc:sqlite:/Users/athh15/Downloads/ThrounHugbunadar-master/Hoteldb.db");
+            connection =  DriverManager.getConnection(DB_URL);
             Statement statement = connection.createStatement();
             statement.setQueryTimeout(30);
             String query = "INSERT INTO Reservation(roomId, userId, date) VALUES (" + roomId + ", " + userId +", " + date + ")";
@@ -218,7 +219,7 @@ public class DatabaseController {
     public static int registerDatabase(String query) {
         int executeUpdate = 0;
         try {
-            Connection connection =  DriverManager.getConnection("jdbc:sqlite:/Users/athh15/Downloads/ThrounHugbunadar-master/Hoteldb.db");
+            Connection connection =  DriverManager.getConnection(DB_URL);
             Statement statement = connection.createStatement();
             statement.setQueryTimeout(30);
             executeUpdate = statement.executeUpdate(query);
@@ -232,7 +233,7 @@ public class DatabaseController {
         Connection connection = null;
         int log = 1;
         try {    
-            connection = DriverManager.getConnection("jdbc:sqlite:/Users/athh15/Downloads/ThrounHugbunadar-master/Hoteldb.db");
+            connection = DriverManager.getConnection(DB_URL);
             Statement statement = connection.createStatement();
             statement.setQueryTimeout(30);
             ResultSet rs = statement.executeQuery("SELECT * from User WHERE username = '" + username + "' AND password = '" + password + "'");

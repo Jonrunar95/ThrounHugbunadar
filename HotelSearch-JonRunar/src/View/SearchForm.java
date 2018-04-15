@@ -128,20 +128,17 @@ public class SearchForm extends javax.swing.JFrame {
 
         jLabel1.setText("Room size:");
 
-        jComboBoxRoomSize.setBackground(new java.awt.Color(255, 255, 255));
-        jComboBoxRoomSize.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 Room", "2 Rooms", "3 Rooms", "4 Rooms" }));
+        jComboBoxRoomSize.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "1 Room", "2 Rooms", "3 Rooms", "4 Rooms" }));
 
         jCheckBoxTvibreittRum.setText("Double bed");
 
         jLabel2.setText("Price Range:");
 
-        jComboBoxPrice.setBackground(new java.awt.Color(255, 255, 255));
-        jComboBoxPrice.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0 - 5000", "5000 - 10000", "10000 - 15000", "20000+" }));
+        jComboBoxPrice.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "0 - 5000", "5000 - 10000", "10000 - 15000", "20000+" }));
 
         jLabel3.setText("Stars:");
 
-        jComboBoxStars.setBackground(new java.awt.Color(255, 255, 255));
-        jComboBoxStars.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5" }));
+        jComboBoxStars.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "1", "2", "3", "4", "5" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -249,16 +246,7 @@ public class SearchForm extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Hotel Search");
 
-        jButtonLogOut.setBackground(new java.awt.Color(255, 255, 255));
-        jButtonLogOut.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jButtonLogOut.setText("Log out");
-        jButtonLogOut.setMaximumSize(new java.awt.Dimension(95, 47));
-        jButtonLogOut.setMinimumSize(new java.awt.Dimension(95, 47));
-        jButtonLogOut.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonLogOutActionPerformed(evt);
-            }
-        });
+        jButtonLogOut.setText("Log Out");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -272,7 +260,7 @@ public class SearchForm extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonInnskraning))
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 218, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabelMin)
@@ -280,8 +268,8 @@ public class SearchForm extends javax.swing.JFrame {
                         .addComponent(jLabelExit)
                         .addGap(12, 12, 12))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(jButtonLogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonLogOut)
+                        .addGap(18, 18, 18)
                         .addComponent(jButtonMyHotels)))
                 .addContainerGap())
         );
@@ -298,9 +286,10 @@ public class SearchForm extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButtonInnskraning, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButtonNyskraning, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButtonMyHotels, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonLogOut, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(14, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButtonMyHotels, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonLogOut)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

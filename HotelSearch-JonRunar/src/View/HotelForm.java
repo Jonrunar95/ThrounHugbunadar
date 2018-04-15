@@ -53,6 +53,9 @@ public final class HotelForm extends javax.swing.JFrame {
     
     public void stillaSidu() throws IOException {
         if(hotel == null) throw new IllegalArgumentException("Upphafstilla þarf hótel!");
+        if(herbergi.size() == 0) {
+            System.out.print("Engin herbergi í boði þessa daga");
+        }
         else {
             stillaConv();
             //stillaMynd();
@@ -104,6 +107,7 @@ public final class HotelForm extends javax.swing.JFrame {
     }
     
     private void stillaConv() {
+        System.out.print(hotel.size());
         Hotel theHotel = hotel.get(sida-1);
         String[] convinience = theHotel.getConveniences();
         for(int i = 0; i < convinience.length; i++) {
