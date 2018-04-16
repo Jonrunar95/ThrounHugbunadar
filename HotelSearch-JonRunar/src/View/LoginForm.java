@@ -249,8 +249,8 @@ private boolean loggedIn;
         char[] charPassword = jPasswordField.getPassword();
         String password = String.valueOf(charPassword);
         int log = login(username, password);
-        if(log == 0) {
-            SearchForm hf = new SearchForm(true);
+        if(log != -1) {
+            SearchForm hf = new SearchForm(true, log);
             hf.setVisible(true);
             hf.pack();
             hf.setLocationRelativeTo(null);
@@ -265,7 +265,7 @@ private boolean loggedIn;
     }//GEN-LAST:event_jButtonLoginActionPerformed
 
     private void jButtonHaettaVidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHaettaVidActionPerformed
-            SearchForm hf = new SearchForm(false);
+            SearchForm hf = new SearchForm(false, -1);
             hf.setVisible(true);
             hf.pack();
             hf.setLocationRelativeTo(null);

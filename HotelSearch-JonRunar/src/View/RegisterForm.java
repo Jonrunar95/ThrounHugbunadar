@@ -313,7 +313,7 @@ public class RegisterForm extends javax.swing.JFrame {
                 valkostir,                          //Fylki með möguleikum
                 valkostir[0]);                      //Sjalfgefna gildið
         if (n == 0){
-            SearchForm sf = new SearchForm(false);
+            SearchForm sf = new SearchForm(false, -1);
             sf.setVisible(true);
             sf.pack();
             sf.setLocationRelativeTo(null);

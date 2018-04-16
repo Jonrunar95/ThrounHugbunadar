@@ -6,6 +6,7 @@
 package Controller;
 
 import static Controller.DatabaseController.getUsernames;
+import static Controller.DatabaseController.getUsers;
 import static Controller.DatabaseController.registerDatabase;
 
 
@@ -27,6 +28,7 @@ public class RegisterController {
     public static String register(String name, String ssn, String username, String password1, String password2) {
         String s = "";
         s = getUsernames(username);
+        int count = getUsers() + 1;
 
         if(name.equals("") || username.equals("") || password1.equals("")) {
             s = "Nýskráning mistókst, vinsamlegast fylltu í alla reitina!";
@@ -37,9 +39,11 @@ public class RegisterController {
         } else if(ssn.length() != 10) {
             s = "Nýskráning mistókst, kennitala verður að vera 10 stafir";
         }
-        else{
-            String query = "INSERT INTO User(name, ssn, username, password) VALUES (" + name + ", " + ssn +", " + username + ", " + password1 + ")";
+        else {
+            String query = "INSERT INTO User(id, name, ssn, username, password) VALUES ('" + count + "', '" + name + "', '" + ssn +"', '" + username + "', '" + password1 + "')";
+            System.out.print("1");
             int i = registerDatabase(query);
+            System.out.print("2");
             if (i==1){
                 s = "Nýskráning tókst";
             }

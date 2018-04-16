@@ -30,12 +30,13 @@ public class SearchForm extends javax.swing.JFrame {
 
     boolean checkBoxes[];
     private SearchController search;
+    private int userId; // -1 ef enginn er loggaður inn, annars userId á þeim sem er loggaður inn.
     //private LoginForm lf = new LoginForm();
     /**
      * Creates new form SearchController
      */
-    public SearchForm(boolean isLoggedIn) {
-        
+    public SearchForm(boolean isLoggedIn, int log) {
+        this.userId = log;
         initComponents();
         this.setLocationRelativeTo(null); // center form in the screen
         
@@ -44,7 +45,7 @@ public class SearchForm extends javax.swing.JFrame {
             jButtonInnskraning.setVisible(false);
             jButtonNyskraning.setVisible(false);
             jButtonLogOut.setVisible(true);
-        }else {
+        } else {
             jButtonMyHotels.setVisible(false);
             jButtonLogOut.setVisible(false);
             jButtonInnskraning.setVisible(true);
@@ -247,6 +248,11 @@ public class SearchForm extends javax.swing.JFrame {
         jLabel5.setText("Hotel Search");
 
         jButtonLogOut.setText("Log Out");
+        jButtonLogOut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLogOutActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -329,15 +335,12 @@ public class SearchForm extends javax.swing.JFrame {
         Date date1 = jXDatePickerCheckIn.getDate();//Skilar dagsetningu. Null ef ekkert er valið
         Date date2 = jXDatePickerCheckOut.getDate();//Skilar dagsetningu. Null ef ekkert er valið
         int roomSize = jComboBoxRoomSize.getSelectedIndex();//Skilar 0, 1,2,3 eða 4. 0 ef allt er valið
-        
-        if(date1 == null || date2 == null) {
+        Date today = new Date();
+        if((date1 == null) || (date2 == null) || (date1.after(date2)) || (date1.before(today))) {
             JOptionPane.showMessageDialog(null, "Search failed! Please put in valid dates.", "Search", JOptionPane.ERROR_MESSAGE);
             return;
         }
         
-        DateFormat oDateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        String sDate1 = oDateFormat.format(date1);
-        String sDate2 = oDateFormat.format(date2);
         boolean tvibreitt = jCheckBoxTvibreittRum.isSelected();
 
         int price = jComboBoxPrice.getSelectedIndex();//Skilar 0, 1,2,3,4 eða 5. 0 ef allt er valið
@@ -346,17 +349,21 @@ public class SearchForm extends javax.swing.JFrame {
         showRooms(room);
         ArrayList<Hotel> hotel = getHotel();
         ArrayList<Date> dates = getTotalDates();
-        
-        HotelForm hf;
-        try {
-            hf = new HotelForm(room, hotel, dates);
-            hf.setVisible(true);
-            hf.pack();
-            hf.setLocationRelativeTo(null);
-            hf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            //this.dispose();
-        } catch (IOException ex) {
-            Logger.getLogger(SearchForm.class.getName()).log(Level.SEVERE, null, ex);
+        if(room.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No rooms available on these dates.", "Search", JOptionPane.ERROR_MESSAGE);
+            return;            
+        } else {
+            HotelForm hf;
+            try {
+                hf = new HotelForm(room, hotel, dates, userId);
+                hf.setVisible(true);
+                hf.pack();
+                hf.setLocationRelativeTo(null);
+                hf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                //this.dispose();
+            } catch (IOException ex) {
+                Logger.getLogger(SearchForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_searchButtonActionPerformed
 
@@ -396,7 +403,7 @@ public class SearchForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonMyHotelsActionPerformed
 
     private void jButtonLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogOutActionPerformed
-        SearchForm sf = new SearchForm(false);
+        SearchForm sf = new SearchForm(false, -1);
         sf.setVisible(true);
         sf.pack();
         sf.setLocationRelativeTo(null);
@@ -440,7 +447,7 @@ public class SearchForm extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SearchForm(false).setVisible(true);
+                new SearchForm(false, -1).setVisible(true);
             }
         });
     }

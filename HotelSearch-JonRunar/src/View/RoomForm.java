@@ -5,13 +5,11 @@
  */
 package View;
 
+import static Controller.DatabaseController.reserveDate;
 import Model.Hotel;
 import Model.Room;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 /**
@@ -23,16 +21,18 @@ public class RoomForm extends javax.swing.JFrame {
     private static ArrayList<Room> room;
     private static ArrayList<Hotel> hotel;
     private static ArrayList<Date> dates;
+    private static int userId;
     private int sida;
     
     /**
      * Creates new form RoomForm
      */
-    public RoomForm(ArrayList<Room> room, ArrayList<Hotel> hotel, ArrayList<Date> dates) {
+    public RoomForm(ArrayList<Room> room, ArrayList<Hotel> hotel, ArrayList<Date> dates, int userId) {
         initComponents();
         RoomForm.room = room;
         RoomForm.hotel = hotel;
         RoomForm.dates = dates;
+        RoomForm.userId = userId;
         sida = 1;
         prevButton.setEnabled(false);
         doubleCheckBox.setEnabled(false);
@@ -249,7 +249,11 @@ public class RoomForm extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void resButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resButtonActionPerformed
-        // TODO add your handling code here:
+        String userID = userId +"";
+        String roomId = room.get(sida-1).getRoomid() + "";        
+        for(int i = 0; i < dates.size()-1; i++) {
+            reserveDate(dates.get(i), userID , roomId);
+        }
     }//GEN-LAST:event_resButtonActionPerformed
 
     private void prevButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prevButtonActionPerformed
@@ -300,7 +304,7 @@ public class RoomForm extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RoomForm(room, hotel, dates).setVisible(true);
+                new RoomForm(room, hotel, dates, userId).setVisible(true);
             }
         });
     }
@@ -326,12 +330,30 @@ public class RoomForm extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void stillaSidu() {
+        if(sida>hotel.size()) {
+            sida = sida-room.size();
+        }
+        if(sida == 0) {
+            sida = room.size();
+        }
+        if(sida==1) {
+            prevButton.setEnabled(false);
+        }   
+        if(sida==room.size()) {
+            nextButton.setEnabled(false);
+        }
+        if(sida==room.size()-1) {
+            nextButton.setEnabled(true);
+        }
+        if(sida==2) {
+            prevButton.setEnabled(true);
+        }
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         stillaSize();
         stillaDouble();
         stillaPrice();
         stillaNR();
-        stillaHotelNafn();
+        //stillaHotelNafn();
     }
 
     private void stillaSize() {
@@ -356,15 +378,12 @@ public class RoomForm extends javax.swing.JFrame {
     private void fyrriSida() {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         sida--;
-        if(sida==1) prevButton.setEnabled(false);
         stillaSidu();
     }
 
     private void naestaSida() {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         sida++;
-        if(sida==room.size()) nextButton.setEnabled(false);
-        if(sida==2) prevButton.setEnabled(true);
         stillaSidu();
     }
 

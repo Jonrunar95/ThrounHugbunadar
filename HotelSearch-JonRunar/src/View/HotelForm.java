@@ -31,6 +31,7 @@ public final class HotelForm extends javax.swing.JFrame {
     private static ArrayList<Room> herbergi;
     private static ArrayList<Hotel> hotel;
     private static ArrayList<Date> dates;
+    private static int userId;
     private int sida;
     /**
      * Creates new form HotelForm
@@ -40,9 +41,10 @@ public final class HotelForm extends javax.swing.JFrame {
      * @throws java.io.IOException
      */
 
-    public HotelForm(ArrayList<Room> room, ArrayList<Hotel> hotel, ArrayList<Date> dates) throws IOException {
+    public HotelForm(ArrayList<Room> room, ArrayList<Hotel> hotel, ArrayList<Date> dates, int userId) throws IOException {
 
         initComponents();
+        HotelForm.userId = userId;
         HotelForm.herbergi = room;
         HotelForm.hotel = hotel;
         HotelForm.dates = dates;
@@ -53,8 +55,23 @@ public final class HotelForm extends javax.swing.JFrame {
     
     public void stillaSidu() throws IOException {
         if(hotel == null) throw new IllegalArgumentException("Upphafstilla þarf hótel!");
-        if(herbergi.size() == 0) {
-            System.out.print("Engin herbergi í boði þessa daga");
+        if(sida>hotel.size()) {
+            sida = sida-hotel.size();
+        }
+        if(sida == 0) {
+            sida = hotel.size();
+        }
+        if(sida==1) {
+            fyrra.setEnabled(false);
+        }   
+        if(sida==hotel.size()) {
+            naesta.setEnabled(false);
+        }
+        if(sida==2) {
+            fyrra.setEnabled(true);
+        }
+        if(sida==hotel.size()) {
+            naesta.setEnabled(false);
         }
         else {
             stillaConv();
@@ -417,7 +434,7 @@ public final class HotelForm extends javax.swing.JFrame {
     }//GEN-LAST:event_haettaVidActionPerformed
 
     private void skodaHerbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_skodaHerbActionPerformed
-        RoomForm rf = new RoomForm(herbergi, hotel, dates);
+        RoomForm rf = new RoomForm(herbergi, hotel, dates, userId);
         rf.setVisible(true);
         rf.pack();
         rf.setLocationRelativeTo(null);
@@ -463,7 +480,7 @@ public final class HotelForm extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new HotelForm(herbergi, hotel, dates).setVisible(true);
+                    new HotelForm(herbergi, hotel, dates, userId).setVisible(true);
                 } catch (IOException ex) {
                     Logger.getLogger(HotelForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -504,14 +521,11 @@ public final class HotelForm extends javax.swing.JFrame {
 
       private void naestaSida() throws IOException {
         sida++;
-        if(sida==hotel.size()) naesta.setEnabled(false);
-        if(sida==2) fyrra.setEnabled(true);
         stillaSidu();
     }
 
     private void fyrriSida() throws IOException {
         sida--;
-        if(sida==1) fyrra.setEnabled(false);
         stillaSidu();
     }
 

@@ -13,6 +13,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
@@ -122,6 +124,37 @@ public class DatabaseController {
         }
         return room;
     }
+    
+    public static int getUsers() {
+        int count = 0;
+        Connection connection = null;
+        try {
+            connection =  DriverManager.getConnection(DB_URL);
+            Statement statement = connection.createStatement();
+            statement.setQueryTimeout(30);
+            String searchForUser = "SELECT * from User";
+            ResultSet rs = statement.executeQuery(searchForUser);
+            while(rs.next()) {
+                count++;
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.toString());
+        }
+        finally
+        {
+          try
+          {
+            if(connection != null)
+              connection.close();
+          }
+          catch(SQLException e)
+          {
+            // connection close failed.
+            System.err.println(e);
+          }
+        }
+        return count;
+    }
 
     public static String getUsernames(String username) {
         String s = "";
@@ -162,7 +195,10 @@ public class DatabaseController {
             Statement statement = connection.createStatement();
             statement.setQueryTimeout(30);
             for(int i = 0; i<dates.size(); i++) {
-                String reserved = "SELECT * from Reservation where roomId = '" + roomId + "'" + " AND DATE = '" + dates.get(i) + "'";
+                DateFormat oDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+                String sDate1 = oDateFormat.format(dates.get(i)).replace("-", " ");
+                System.out.print(sDate1 + " ");
+                String reserved = "SELECT * from Reservation where roomId = '" + roomId + "'" + " AND DATE = '" + sDate1 + "'";
                 ResultSet rs = statement.executeQuery(reserved);
                 while(rs.next()) {
                     isReserved = false;
@@ -188,13 +224,16 @@ public class DatabaseController {
         return isReserved;
     }
     
-    public static void reserveDate(String date, String userId, String roomId) {
+    public static void reserveDate(Date date, String userId, String roomId) {
         Connection connection = null;
         try {
+            DateFormat oDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+            String sDate1 = oDateFormat.format(date).replace("-", " ");
+            System.out.print(sDate1 + " ");
             connection =  DriverManager.getConnection(DB_URL);
             Statement statement = connection.createStatement();
             statement.setQueryTimeout(30);
-            String query = "INSERT INTO Reservation(roomId, userId, date) VALUES (" + roomId + ", " + userId +", " + date + ")";
+            String query = "INSERT INTO Reservation(roomId, userId, date) VALUES ('" + roomId + "', '" + userId +"', '" + sDate1 + "')";
             statement.executeUpdate(query);
         } 
         catch (SQLException ex) {
@@ -219,6 +258,7 @@ public class DatabaseController {
     public static int registerDatabase(String query) {
         int executeUpdate = 0;
         try {
+            System.out.print(query);
             Connection connection =  DriverManager.getConnection(DB_URL);
             Statement statement = connection.createStatement();
             statement.setQueryTimeout(30);
@@ -231,19 +271,21 @@ public class DatabaseController {
 
     public static int loginDatabase(String username, String password) {
         Connection connection = null;
-        int log = 1;
+        int log = -1;
         try {    
             connection = DriverManager.getConnection(DB_URL);
             Statement statement = connection.createStatement();
             statement.setQueryTimeout(30);
             ResultSet rs = statement.executeQuery("SELECT * from User WHERE username = '" + username + "' AND password = '" + password + "'");
             while (rs.next()) {
-                log = 0;
+                String stringLog = rs.getString("id");
+                System.out.print(stringLog);
+                log = Integer.parseInt(stringLog);
             }
         } catch (SQLException ex) { 
             Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-                finally
+        finally
         {
           try
           {

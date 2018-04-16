@@ -27,7 +27,7 @@ CREATE TABLE User (
 CREATE TABLE Reservation (
     roomId          int NOT NULL,
     userId          int NOT NULL,
-    date            date NOT NULL,
+    date            varchar(255) NOT NULL,
     FOREIGN KEY (userId) REFERENCES users(id),
     FOREIGN KEY (roomId) REFERENCES Room(id)
 );

@@ -68,12 +68,14 @@ VALUES (
 );
 
 INSERT INTO User (
+    id,
     name,
     ssn,
     username,
     password
 )
 VALUES (
+    1,
     "Jón Rúnar",
     "0102953439",
     "jrb",
