@@ -35,7 +35,7 @@ public class RoomForm extends javax.swing.JFrame {
     /**
      * Creates new form RoomForm
      */
-    public RoomForm(ArrayList<Room> room, Hotel theHotel, ArrayList<Date> dates, int userId) {
+    public RoomForm(ArrayList<Room> room, Hotel theHotel, ArrayList<Date> dates, int userId) throws IOException {
         initComponents();
         RoomForm.room = room;
         RoomForm.theHotel = theHotel;

@@ -14,7 +14,6 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 
 
 /*
@@ -87,7 +86,10 @@ public final class HotelForm extends javax.swing.JFrame {
             stillaAvailableRooms();
         
     }
-    private void stillaNR() {
+    }
+        
+        
+    public void stillaNR() {
         stadsSida.setText(sida + "/" + hotel.size());
     }
     
@@ -528,11 +530,17 @@ public final class HotelForm extends javax.swing.JFrame {
                 theHotelRooms.add(herbergi.get(i));
             }
         }
-        RoomForm rf = new RoomForm(theHotelRooms, theHotel, dates, userId);
-        rf.setVisible(true);
-        rf.pack();
-        rf.setLocationRelativeTo(null);
-        rf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        RoomForm rf;
+        try {
+            rf = new RoomForm(theHotelRooms, theHotel, dates, userId);
+            rf.setVisible(true);
+            rf.pack();
+            rf.setLocationRelativeTo(null);
+            rf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);        
+        } catch (IOException ex) {
+            Logger.getLogger(HotelForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }//GEN-LAST:event_skodaHerbActionPerformed
 
     private void jLabelExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelExitMouseClicked
