@@ -131,7 +131,6 @@
                   <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-<<<<<<< HEAD
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="myndLabel" alignment="0" min="-2" pref="225" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
@@ -141,10 +140,6 @@
                               </Group>
                           </Group>
                           <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
-=======
-                          <Component id="myndLabel" min="-2" pref="245" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
->>>>>>> 055a764c53b6cde2eb8b7e4b67d424c09dcdbcc8
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Group type="102" attributes="0">
@@ -202,27 +197,12 @@
                           <Component id="skodaHerb" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="haettaVid" min="-2" max="-2" attributes="0"/>
-<<<<<<< HEAD
                           <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
                           <Component id="fyrra" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="naesta" min="-2" max="-2" attributes="0"/>
-=======
-                          <EmptySpace pref="9" max="32767" attributes="0"/>
-                          <Component id="fyrra" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="naesta" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="9" max="32767" attributes="0"/>
->>>>>>> 055a764c53b6cde2eb8b7e4b67d424c09dcdbcc8
                       </Group>
                   </Group>
-              </Group>
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="RoomsNumber" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -273,19 +253,6 @@
                                   <EmptySpace max="32767" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="conv2" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="conv4" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="conv5" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="conv6" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="conv7" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="conv8" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace pref="24" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -302,22 +269,10 @@
                               <Component id="conv7" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-<<<<<<< HEAD
                           <Component id="conv8" min="-2" pref="23" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="124" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-=======
-                          <Component id="myndLabel" max="32767" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="RoomsNumber" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
->>>>>>> 055a764c53b6cde2eb8b7e4b67d424c09dcdbcc8
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="skodaHerb" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="stadsSida" alignment="3" min="-2" max="-2" attributes="0"/>

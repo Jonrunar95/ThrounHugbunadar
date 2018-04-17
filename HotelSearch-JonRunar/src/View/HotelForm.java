@@ -33,6 +33,7 @@ public final class HotelForm extends javax.swing.JFrame {
     private static ArrayList<Date> dates;
     private static int userId;
     private int sida;
+    private static Hotel theHotel;
     /**
      * Creates new form HotelForm
      * @param room
@@ -49,31 +50,34 @@ public final class HotelForm extends javax.swing.JFrame {
         HotelForm.hotel = hotel;
         HotelForm.dates = dates;
         sida = 1;
+        HotelForm.theHotel = hotel.get(sida-1);
         stillaSidu();
         fyrra.setEnabled(false);
     }
     
     public void stillaSidu() throws IOException {
         if(hotel == null) throw new IllegalArgumentException("Upphafstilla þarf hótel!");
-        if(sida>hotel.size()) {
-            sida = sida-hotel.size();
-        }
-        if(sida == 0) {
-            sida = hotel.size();
-        }
-        if(sida==1) {
-            fyrra.setEnabled(false);
-        }   
-        if(sida==hotel.size()) {
-            naesta.setEnabled(false);
-        }
-        if(sida==2) {
-            fyrra.setEnabled(true);
-        }
-        if(sida==hotel.size()) {
-            naesta.setEnabled(false);
-        }
-        
+        else {
+            theHotel = HotelForm.hotel.get(sida-1);  
+            
+            if(sida>hotel.size()) {
+                sida = sida-hotel.size();
+            }
+            if(sida == 0) {
+                sida = hotel.size();
+            }
+            if(sida==1) {
+                fyrra.setEnabled(false);
+            }   
+            if(sida==hotel.size()) {
+                naesta.setEnabled(false);
+            }
+            if(sida==2) {
+                fyrra.setEnabled(true);
+            }
+            if(sida==hotel.size()-1) {
+                naesta.setEnabled(true);
+            }
             stillaConv();
             stillaMynd();
             stillaNafn();
@@ -102,52 +106,106 @@ public final class HotelForm extends javax.swing.JFrame {
     }
     
     private void stillaStjornur() {
-        Hotel theHotel = hotel.get(sida-1);
         int stars = theHotel.getStars();
-        if(stars == 1) {
-            hotelStjornur.setText("*");
-        }else if(stars == 2) {
-            hotelStjornur.setText("**");
-        }else if(stars == 3) {
-            hotelStjornur.setText("***");
-        }else if(stars == 4) {
-            hotelStjornur.setText("****");
-        }else if(stars == 5) {
-            hotelStjornur.setText("*****");
+        switch (stars) {
+            case 1:
+                hotelStjornur.setText("*");
+                break;
+            case 2:
+                hotelStjornur.setText("**");
+                break;
+            case 3:
+                hotelStjornur.setText("***");
+                break;
+            case 4:
+                hotelStjornur.setText("****");
+                break;
+            case 5:
+                hotelStjornur.setText("*****");
+                break;
+            default:
+                break;
         }
     }
     
     private void stillaNafn() {
-        Hotel theHotel = hotel.get(sida-1);
         String name = theHotel.getName();
         heitiHotel.setText(name);
     }
     
     private void stillaConv() {
         System.out.print(hotel.size());
-        Hotel theHotel = hotel.get(sida-1);
         String[] convinience = theHotel.getConveniences();
         for(int i = 0; i < convinience.length; i++) {
-            if(i == 0) {
-                conv0.setText(convinience[i]);
-            }else if(i == 1) {
-                conv1.setText(convinience[i]);
-            }else if(i == 2) {
-                conv2.setText(convinience[i]);
-            }else if(i == 3) {
-                conv3.setText(convinience[i]);
-            }else if(i == 4) {
-                conv4.setText(convinience[i]);
-            }else if(i == 5) {
-                conv5.setText(convinience[i]);
-            }else if(i == 6) {
-                conv6.setText(convinience[i]);
-            }else if(i == 7) {
-                conv7.setText(convinience[i]);
-            }else if(i == 8) {
-                conv8.setText(convinience[i]);
-            }else if(i == 9) {
-                conv9.setText(convinience[i]);
+            switch (i) {
+                case 0:
+                    conv0.setText(convinience[i]);
+                    break;
+                case 1:
+                    conv1.setText(convinience[i]);
+                    break;
+                case 2:
+                    conv2.setText(convinience[i]);
+                    break;
+                case 3:
+                    conv3.setText(convinience[i]);
+                    break;
+                case 4:
+                    conv4.setText(convinience[i]);
+                    break;
+                case 5:
+                    conv5.setText(convinience[i]);
+                    break;
+                case 6:
+                    conv6.setText(convinience[i]); 
+                    break;
+                case 7:
+                    conv7.setText(convinience[i]);
+                    break;
+                case 8:
+                    conv8.setText(convinience[i]);
+                    break;
+                case 9:
+                    conv9.setText(convinience[i]);
+                    break;
+                default:
+                    break;
+            }
+        }
+        for(int i = 0; i < (10-convinience.length); i++) {
+            switch (i) {
+                case 0:
+                    conv9.setText("");
+                    break;
+                case 1:
+                    conv8.setText("");
+                    break;
+                case 2:
+                    conv7.setText("");
+                    break;
+                case 3:
+                    conv6.setText("");
+                    break;
+                case 4:
+                    conv5.setText("");
+                    break;
+                case 5:
+                    conv4.setText("");
+                    break;
+                case 6:
+                    conv3.setText("");
+                    break;
+                case 7:
+                    conv2.setText("");
+                    break;
+                case 8:
+                    conv1.setText("");
+                    break;
+                case 9:
+                    conv0.setText("");
+                    break;
+                default:
+                    break;
             }
         }
     }
@@ -179,7 +237,6 @@ public final class HotelForm extends javax.swing.JFrame {
         conv3 = new javax.swing.JLabel();
         conv4 = new javax.swing.JLabel();
         conv2 = new javax.swing.JLabel();
-        conv5 = new javax.swing.JLabel();
         conv6 = new javax.swing.JLabel();
         conv7 = new javax.swing.JLabel();
         conv8 = new javax.swing.JLabel();
@@ -188,6 +245,7 @@ public final class HotelForm extends javax.swing.JFrame {
         conv9 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         RoomsNumber = new javax.swing.JLabel();
+        conv5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -276,7 +334,23 @@ public final class HotelForm extends javax.swing.JFrame {
 
         nafnStadsetning.setText("nafnStadsetning");
 
+        conv1.setText("2");
+
+        conv0.setText("1");
+
         conv.setText("Conveniences:");
+
+        conv3.setText("4");
+
+        conv4.setText("5");
+
+        conv2.setText("3");
+
+        conv6.setText("7");
+
+        conv7.setText("8");
+
+        conv8.setText("9");
 
         stjornur.setText("Stars:");
 
@@ -285,6 +359,8 @@ public final class HotelForm extends javax.swing.JFrame {
         jLabel1.setText("Available rooms:");
 
         RoomsNumber.setText("number");
+
+        conv5.setText("6");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -297,36 +373,42 @@ public final class HotelForm extends javax.swing.JFrame {
                         .addComponent(myndLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(stadsetning)
+                                        .addComponent(stjornur))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(nafnStadsetning)
+                                        .addComponent(hotelStjornur))
+                                    .addGap(86, 86, 86))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                            .addComponent(conv0, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(conv1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                            .addComponent(conv2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(conv9))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                            .addComponent(conv4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(conv5, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                            .addComponent(conv6, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(conv7, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(conv8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                            .addGap(89, 89, 89)
+                                            .addComponent(conv3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGap(113, 113, 113)))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(conv7)
-                                .addGap(18, 18, 18)
-                                .addComponent(conv8))
-                            .addComponent(conv)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(conv9)
-                                .addGap(18, 18, 18)
-                                .addComponent(conv0)
-                                .addGap(18, 18, 18)
-                                .addComponent(conv3)
-                                .addGap(18, 18, 18)
-                                .addComponent(conv1))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(conv4)
-                                .addGap(18, 18, 18)
-                                .addComponent(conv2)
-                                .addGap(18, 18, 18)
-                                .addComponent(conv5)
-                                .addGap(18, 18, 18)
-                                .addComponent(conv6))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(stadsetning)
-                                    .addComponent(stjornur, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(hotelStjornur)
-                                    .addComponent(nafnStadsetning))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(conv)
+                                .addContainerGap())))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(stadsSida)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -347,22 +429,25 @@ public final class HotelForm extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(myndLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(nafnStadsetning)
                             .addComponent(stadsetning))
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(stjornur)
                             .addComponent(hotelStjornur))
-                        .addGap(18, 18, 18)
+                        .addGap(20, 20, 20)
                         .addComponent(conv)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(conv9)
                             .addComponent(conv0)
                             .addComponent(conv3)
                             .addComponent(conv1))
@@ -399,14 +484,15 @@ public final class HotelForm extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42))
         );
 
         pack();
@@ -436,7 +522,13 @@ public final class HotelForm extends javax.swing.JFrame {
     }//GEN-LAST:event_haettaVidActionPerformed
 
     private void skodaHerbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_skodaHerbActionPerformed
-        RoomForm rf = new RoomForm(herbergi, hotel, dates, userId);
+        ArrayList<Room> theHotelRooms = new ArrayList<>();
+        for(int i = 0; i < herbergi.size(); i++) {
+            if( theHotel.getHotelId() == herbergi.get(i).getHotel().getHotelId()) {
+                theHotelRooms.add(herbergi.get(i));
+            }
+        }
+        RoomForm rf = new RoomForm(theHotelRooms, theHotel, dates, userId);
         rf.setVisible(true);
         rf.pack();
         rf.setLocationRelativeTo(null);
@@ -551,8 +643,14 @@ public final class HotelForm extends javax.swing.JFrame {
     }
 
     private void stillaAvailableRooms() {
-        Hotel theHotel = hotel.get(sida-1);
-        RoomsNumber.setText(Integer.toString(herbergi.size()));
+        int roomNumber = 0;
+        for(int i = 0; i < herbergi.size(); i++) {
+            if (theHotel.getHotelId() == herbergi.get(i).getHotel().getHotelId()) {
+                roomNumber++;
+            }
+        }
+        
+        RoomsNumber.setText(Integer.toString(roomNumber));
     }
 
 }

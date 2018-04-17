@@ -27,7 +27,7 @@ import javax.swing.JFrame;
 public class RoomForm extends javax.swing.JFrame {
     
     private static ArrayList<Room> room;
-    private static ArrayList<Hotel> hotel;
+    private static Hotel theHotel;
     private static ArrayList<Date> dates;
     private static int userId;
     private int sida;
@@ -35,10 +35,10 @@ public class RoomForm extends javax.swing.JFrame {
     /**
      * Creates new form RoomForm
      */
-    public RoomForm(ArrayList<Room> room, ArrayList<Hotel> hotel, ArrayList<Date> dates, int userId) throws IOException {
+    public RoomForm(ArrayList<Room> room, Hotel theHotel, ArrayList<Date> dates, int userId) {
         initComponents();
         RoomForm.room = room;
-        RoomForm.hotel = hotel;
+        RoomForm.theHotel = theHotel;
         RoomForm.dates = dates;
         RoomForm.userId = userId;
         sida = 1;
@@ -321,7 +321,7 @@ public class RoomForm extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new RoomForm(room, hotel, dates, userId).setVisible(true);
+                    new RoomForm(room, theHotel, dates, userId).setVisible(true);
                 } catch (IOException ex) {
                     Logger.getLogger(RoomForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -350,7 +350,7 @@ public class RoomForm extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void stillaSidu() throws IOException {
-        if(sida>hotel.size()) {
+        if(sida>room.size()) {
             sida = sida-room.size();
         }
         if(sida == 0) {
@@ -378,9 +378,8 @@ public class RoomForm extends javax.swing.JFrame {
     }
 
     private void stillaSize() {
-        
-        
-        fjoldiLabel.setText(String.valueOf(room.get(sida-1).getSize()));
+        System.out.print(sida);
+        fjoldiLabel.setText(room.get(sida-1).getSize() + "");
     }
 
     private void stillaDouble() {
@@ -409,7 +408,6 @@ public class RoomForm extends javax.swing.JFrame {
     }
 
     private void stillaHotelNafn() {
-        Hotel theHotel = hotel.get(sida-1);
         String name = theHotel.getName();
         jLabelHotelNafn.setText(name);
     }
