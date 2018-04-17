@@ -8,8 +8,16 @@ package View;
 import static Controller.DatabaseController.reserveDate;
 import Model.Hotel;
 import Model.Room;
+import java.awt.Image;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 /**
@@ -257,13 +265,21 @@ public class RoomForm extends javax.swing.JFrame {
     }//GEN-LAST:event_resButtonActionPerformed
 
     private void prevButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prevButtonActionPerformed
-        // TODO add your handling code here:
-        fyrriSida();
+        try {
+            // TODO add your handling code here:
+            fyrriSida();
+        } catch (IOException ex) {
+            Logger.getLogger(RoomForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_prevButtonActionPerformed
 
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
-        // TODO add your handling code here:
-        naestaSida();
+        try {
+            // TODO add your handling code here:
+            naestaSida();
+        } catch (IOException ex) {
+            Logger.getLogger(RoomForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_nextButtonActionPerformed
 
     private void jLabelExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelExitMouseClicked
@@ -304,7 +320,11 @@ public class RoomForm extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RoomForm(room, theHotel, dates, userId).setVisible(true);
+                try {
+                    new RoomForm(room, theHotel, dates, userId).setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(RoomForm.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -329,7 +349,7 @@ public class RoomForm extends javax.swing.JFrame {
     private javax.swing.JButton resButton;
     // End of variables declaration//GEN-END:variables
 
-    private void stillaSidu() {
+    private void stillaSidu() throws IOException {
         if(sida>room.size()) {
             sida = sida-room.size();
         }
@@ -354,6 +374,7 @@ public class RoomForm extends javax.swing.JFrame {
         stillaPrice();
         stillaNR();
         stillaHotelNafn();
+        stillaRoomMynd();
     }
 
     private void stillaSize() {
@@ -374,13 +395,13 @@ public class RoomForm extends javax.swing.JFrame {
         nrLabel.setText(sida + "/" + room.size());
     }
 
-    private void fyrriSida() {
+    private void fyrriSida() throws IOException {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         sida--;
         stillaSidu();
     }
 
-    private void naestaSida() {
+    private void naestaSida() throws IOException {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         sida++;
         stillaSidu();
@@ -389,5 +410,13 @@ public class RoomForm extends javax.swing.JFrame {
     private void stillaHotelNafn() {
         String name = theHotel.getName();
         jLabelHotelNafn.setText(name);
+    }
+
+    private void stillaRoomMynd() throws MalformedURLException, IOException {
+        Room theRoom = room.get(sida-1);
+        String photo = theRoom.getPhoto_url();
+        URL url = new URL(photo);
+        Image image = ImageIO.read(url);
+        myndLabel.setIcon(new ImageIcon(image));
     }
 }

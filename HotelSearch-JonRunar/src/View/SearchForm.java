@@ -210,6 +210,8 @@ public class SearchForm extends javax.swing.JFrame {
         jButtonMyHotels.setBackground(new java.awt.Color(255, 255, 255));
         jButtonMyHotels.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jButtonMyHotels.setText("My hotels");
+        jButtonMyHotels.setMaximumSize(new java.awt.Dimension(109, 47));
+        jButtonMyHotels.setMinimumSize(new java.awt.Dimension(109, 47));
         jButtonMyHotels.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonMyHotelsActionPerformed(evt);
@@ -247,7 +249,11 @@ public class SearchForm extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Hotel Search");
 
+        jButtonLogOut.setBackground(new java.awt.Color(255, 255, 255));
+        jButtonLogOut.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jButtonLogOut.setText("Log Out");
+        jButtonLogOut.setMaximumSize(new java.awt.Dimension(98, 47));
+        jButtonLogOut.setMinimumSize(new java.awt.Dimension(98, 47));
         jButtonLogOut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonLogOutActionPerformed(evt);
@@ -266,7 +272,7 @@ public class SearchForm extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonInnskraning))
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 218, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 226, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabelMin)
@@ -274,9 +280,9 @@ public class SearchForm extends javax.swing.JFrame {
                         .addComponent(jLabelExit)
                         .addGap(12, 12, 12))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(jButtonLogOut)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonMyHotels)))
+                        .addComponent(jButtonLogOut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonMyHotels, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -294,7 +300,7 @@ public class SearchForm extends javax.swing.JFrame {
                         .addComponent(jButtonNyskraning, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButtonMyHotels, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonLogOut)))
+                        .addComponent(jButtonLogOut, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -346,7 +352,7 @@ public class SearchForm extends javax.swing.JFrame {
         int price = jComboBoxPrice.getSelectedIndex();//Skilar 0, 1,2,3,4 eða 5. 0 ef allt er valið
         int stars = jComboBoxStars.getSelectedIndex();//Skilar 0, 1,2,3,4 eða 5. 0 ef allt er valið
         ArrayList<Room> room = search(searchString, date1, date2, roomSize, tvibreitt, price, stars);
-        showRooms(room);
+        //showRooms(room);
         ArrayList<Hotel> hotel = getHotel();
         ArrayList<Date> dates = getTotalDates();
         if(room.isEmpty()) {
