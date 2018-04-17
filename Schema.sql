@@ -13,6 +13,7 @@ CREATE TABLE Room (
     tvibreitt       boolean NOT NULL,
     price           int NOT NULL,
     hotelId        int NOT NULL,
+    photo_url       varchar(65) NOT NULL,
     FOREIGN KEY (hotelId) REFERENCES Hotel(id) 
 );
 

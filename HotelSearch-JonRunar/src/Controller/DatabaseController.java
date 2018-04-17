@@ -198,7 +198,6 @@ public class DatabaseController {
             for(int i = 0; i<dates.size(); i++) {
                 DateFormat oDateFormat = new SimpleDateFormat("dd-MM-yyyy");
                 String sDate1 = oDateFormat.format(dates.get(i)).replace("-", " ");
-                System.out.print(sDate1 + " ");
                 String reserved = "SELECT * from Reservation where roomId = '" + roomId + "'" + " AND DATE = '" + sDate1 + "'";
                 ResultSet rs = statement.executeQuery(reserved);
                 while(rs.next()) {

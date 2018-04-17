@@ -19,6 +19,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -26,6 +27,8 @@ import javax.swing.JFrame;
  */
 public class RoomForm extends javax.swing.JFrame {
     
+    private static ArrayList<Hotel> allHotels;
+    private static ArrayList<Room> allRooms;
     private static ArrayList<Room> room;
     private static Hotel theHotel;
     private static ArrayList<Date> dates;
@@ -35,8 +38,10 @@ public class RoomForm extends javax.swing.JFrame {
     /**
      * Creates new form RoomForm
      */
-    public RoomForm(ArrayList<Room> room, Hotel theHotel, ArrayList<Date> dates, int userId) throws IOException {
+    public RoomForm(ArrayList<Hotel> allHotels, ArrayList<Room> allRooms, ArrayList<Room> room, Hotel theHotel, ArrayList<Date> dates, int userId) throws IOException {
         initComponents();
+        RoomForm.allHotels = allHotels;
+        RoomForm.allRooms = allRooms;
         RoomForm.room = room;
         RoomForm.theHotel = theHotel;
         RoomForm.dates = dates;
@@ -253,14 +258,30 @@ public class RoomForm extends javax.swing.JFrame {
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
-        this.dispose();
+        HotelForm hf;
+        try {
+            hf = new HotelForm( allRooms, allHotels,dates, userId);
+            hf.setVisible(true);
+            hf.pack();
+            hf.setLocationRelativeTo(null);
+            hf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+            this.dispose();
+        } catch (IOException ex) {
+            Logger.getLogger(RoomForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void resButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resButtonActionPerformed
-        String userID = userId +"";
-        String roomId = room.get(sida-1).getRoomid() + "";        
-        for(int i = 0; i < dates.size()-1; i++) {
-            reserveDate(dates.get(i), userID , roomId);
+        if(userId != -1) {    
+            String userID = userId +"";
+            String roomId = room.get(sida-1).getRoomid() + "";     
+            for(int i = 0; i < dates.size()-1; i++) {
+                reserveDate(dates.get(i), userID , roomId);
+            }
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "You need to be logged in in order to reserve dates.", "Search", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_resButtonActionPerformed
 
@@ -321,7 +342,7 @@ public class RoomForm extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new RoomForm(room, theHotel, dates, userId).setVisible(true);
+                    new RoomForm(allHotels, allRooms, room, theHotel, dates, userId).setVisible(true);
                 } catch (IOException ex) {
                     Logger.getLogger(RoomForm.class.getName()).log(Level.SEVERE, null, ex);
                 }

@@ -78,7 +78,6 @@ public class SearchController {
                          break;
             }
         }
-        System.out.println(searchString + ", " + checkIn.toString() + ", " + checkOut.toString() + ", " + size + ", " + tvibreitt + ", " + price + ", " + stars);
         while (!checkIn.after(checkOut)) {
             totalDates.add(checkIn);
             Date temp = new Date(checkIn.getTime() + TimeUnit.DAYS.toMillis( 1 ));
@@ -102,6 +101,19 @@ public class SearchController {
             }
             
         }
+        ArrayList<Hotel> availableHotels = new ArrayList<>();
+        for(int i = 0; i < hotel.size(); i++) {
+            boolean b = false;
+            for(int j = 0; j < room.size(); j++) {
+                if(room.get(i).getHotel().getHotelId() == hotel.get(i).getHotelId()){
+                    b = true;
+                }
+            }
+            if (b = true) {
+                availableHotels.add(hotel.get(i));
+            }
+        }
+        hotel = availableHotels;
         System.out.println("Fjöldi herbergja: " + availableRooms.size());
         
         return availableRooms;

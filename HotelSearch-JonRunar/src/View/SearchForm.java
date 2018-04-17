@@ -13,8 +13,6 @@ import Model.Hotel;
 import Model.Room;
 import java.awt.Color;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
