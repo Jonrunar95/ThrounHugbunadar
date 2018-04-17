@@ -29,6 +29,22 @@ VALUES (
     3,
     "",
     "Morgunmatur;Midbaer;Sturta"
+),
+(
+    4,
+    "Hótel Saga",
+    "Reykjavík",
+    4,
+    "",
+    "Wi-fi;Tv"
+),
+(
+    5,
+    "Grand Hotel Reyjkavík",
+    "Reykjavík",
+    5,
+    "",
+    "Fotlun;Wi-fi;Likamsraekt;Morgunmatur;Midbaer;Spa;Sturta;Tv"
 );
 
 INSERT INTO Room (
@@ -65,6 +81,41 @@ VALUES (
     1,
     10000,
     2
+),
+(
+    5,
+    2,
+    1,
+    20000,
+    5
+),
+(
+    6,
+    2,
+    1,
+    25000,
+    5
+),
+(
+    7,
+    2,
+    1,
+    18000,
+    5
+),
+(
+    8,
+    2,
+    1,
+    10000,
+    4
+),
+(
+    9,
+    2,
+    1,
+    8000,
+    4
 );
 
 INSERT INTO User (
