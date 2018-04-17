@@ -18,14 +18,20 @@ public class Room {
     private boolean tvibreitt;
     private double price;
     private Hotel hotel;
+    private String photo_url;
 
     //Constructor
-    public Room(int roomID, int roomSize, boolean roomTvibreitt, double roomPrice, Hotel roomHotel) {
+    public Room(int roomID, int roomSize, boolean roomTvibreitt, double roomPrice, Hotel roomHotel, String photo_url) {
         roomid = roomID;
         size = roomSize;
         tvibreitt = roomTvibreitt;
         price = roomPrice;
         hotel = roomHotel;
+        this.photo_url = photo_url;
+    }
+
+    public String getPhoto_url() {
+        return photo_url;
     }
 
     public boolean isReserved(Date date) {

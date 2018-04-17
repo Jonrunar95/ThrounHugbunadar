@@ -274,7 +274,7 @@
                       </Group>
                       <Component id="jLabel5" min="-2" pref="171" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="218" max="32767" attributes="0"/>
+                  <EmptySpace pref="226" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="jLabelMin" min="-2" max="-2" attributes="0"/>
@@ -284,7 +284,7 @@
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="jButtonLogOut" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="jButtonMyHotels" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -307,9 +307,9 @@
                           <Component id="jButtonInnskraning" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                           <Component id="jButtonNyskraning" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="103" groupAlignment="3" attributes="0">
+                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                           <Component id="jButtonMyHotels" alignment="3" max="32767" attributes="0"/>
-                          <Component id="jButtonLogOut" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonLogOut" alignment="3" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
@@ -341,6 +341,12 @@
               <Font name="Lucida Grande" size="13" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="My hotels"/>
+            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[109, 47]"/>
+            </Property>
+            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[109, 47]"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonMyHotelsActionPerformed"/>
@@ -401,7 +407,19 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButtonLogOut">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Lucida Grande" size="13" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Log Out"/>
+            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[98, 47]"/>
+            </Property>
+            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[98, 47]"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonLogOutActionPerformed"/>

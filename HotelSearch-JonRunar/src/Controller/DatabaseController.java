@@ -26,7 +26,7 @@ import javax.swing.JOptionPane;
  * @author Notandi
  */
 public class DatabaseController {
-    public static final String DB_URL = "jdbc:sqlite:C:/Users/Notandi/Documents/Skóli/Þróun Hugbúnaðar/ThrounHugbunadar/Hoteldb.db";
+    public static final String DB_URL = "jdbc:sqlite:/Users/athh15/Documents/ThrounHugbunadar/Hoteldb.db";
 
     /**
      *
@@ -99,8 +99,9 @@ public class DatabaseController {
                     int roomSize = Integer.parseInt(rs.getString("size"));
                     boolean roomTvibreitt = rs.getBoolean("tvibreitt");
                     double roomPrice = Double.parseDouble(rs.getString("price"));
+                    String photo = rs.getString("photo_url");
                     if((roomPrice >= price1 && roomPrice < price2) || price2 == 0) {
-                        Room temp = new Room(roomId, roomSize, roomTvibreitt, roomPrice, hotel.get(i));
+                        Room temp = new Room(roomId, roomSize, roomTvibreitt, roomPrice, hotel.get(i), photo);
                         room.add(temp);
                     }
                 }
