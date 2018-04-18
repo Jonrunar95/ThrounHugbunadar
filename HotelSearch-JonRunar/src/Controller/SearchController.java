@@ -78,6 +78,7 @@ public class SearchController {
                          break;
             }
         }
+        System.out.println(price1 + " - " + price2);
         while (!checkIn.after(checkOut)) {
             totalDates.add(checkIn);
             Date temp = new Date(checkIn.getTime() + TimeUnit.DAYS.toMillis( 1 ));
@@ -91,6 +92,8 @@ public class SearchController {
 
         hotel = createHotels(searchString, query);
         System.out.println("Fjöldi hótela: " + hotel.size());
+        System.out.println(size);
+        System.out.println(tvibreitt);
         room = createRooms(hotel, size, tvibreitt, price1, price2, stars);
         ArrayList<Room> availableRooms = new ArrayList<>();
         
@@ -101,19 +104,7 @@ public class SearchController {
             }
             
         }
-        ArrayList<Hotel> availableHotels = new ArrayList<>();
-        for(int i = 0; i < hotel.size(); i++) {
-            boolean b = false;
-            for(int j = 0; j < room.size(); j++) {
-                if(room.get(i).getHotel().getHotelId() == hotel.get(i).getHotelId()){
-                    b = true;
-                }
-            }
-            if (b = true) {
-                availableHotels.add(hotel.get(i));
-            }
-        }
-        hotel = availableHotels;
+        
         System.out.println("Fjöldi herbergja: " + availableRooms.size());
         
         return availableRooms;

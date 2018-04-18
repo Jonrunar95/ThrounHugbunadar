@@ -28,7 +28,7 @@ public class SearchForm extends javax.swing.JFrame {
 
     boolean checkBoxes[];
     private SearchController search;
-    private int userId; // -1 ef enginn er loggaður inn, annars userId á þeim sem er loggaður inn.
+    private final int userId; // -1 ef enginn er loggaður inn, annars userId á þeim sem er loggaður inn.
     //private LoginForm lf = new LoginForm();
     /**
      * Creates new form SearchController
@@ -403,7 +403,11 @@ public class SearchForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonNyskraningActionPerformed
 
     private void jButtonMyHotelsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMyHotelsActionPerformed
-        
+        MinarSidurForm msf = new MinarSidurForm(userId);
+        msf.setVisible(true);
+        msf.pack();
+        msf.setLocationRelativeTo(null);
+        msf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }//GEN-LAST:event_jButtonMyHotelsActionPerformed
 
     private void jButtonLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogOutActionPerformed

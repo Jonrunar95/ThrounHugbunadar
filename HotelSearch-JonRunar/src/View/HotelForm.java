@@ -137,7 +137,6 @@ public final class HotelForm extends javax.swing.JFrame {
     }
     
     private void stillaConv() {
-        System.out.print(hotel.size());
         String[] convinience = theHotel.getConveniences();
         for(int i = 0; i < convinience.length; i++) {
             switch (i) {
@@ -248,6 +247,7 @@ public final class HotelForm extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         RoomsNumber = new javax.swing.JLabel();
         conv5 = new javax.swing.JLabel();
+        jButtonReadReviews = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -362,28 +362,19 @@ public final class HotelForm extends javax.swing.JFrame {
 
         conv5.setText("6");
 
+        jButtonReadReviews.setText("Read reviews");
+        jButtonReadReviews.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonReadReviewsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(RoomsNumber)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(stadsSida)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(skodaHerb)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(haettaVid)
-                        .addGap(61, 61, 61)
-                        .addComponent(fyrra, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(naesta, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -420,7 +411,27 @@ public final class HotelForm extends javax.swing.JFrame {
                                             .addComponent(conv5, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(conv2, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addComponent(conv8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGap(593, 593, 593)))
+                        .addGap(593, 593, 593))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(stadsSida)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(skodaHerb)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(haettaVid))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(RoomsNumber)))
+                        .addGap(61, 61, 61)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(fyrra, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(naesta, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButtonReadReviews, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(conv9)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -464,8 +475,9 @@ public final class HotelForm extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(RoomsNumber))
-                .addGap(78, 78, 78)
+                    .addComponent(RoomsNumber)
+                    .addComponent(jButtonReadReviews))
+                .addGap(73, 73, 73)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(skodaHerb)
                     .addComponent(stadsSida)
@@ -539,7 +551,6 @@ public final class HotelForm extends javax.swing.JFrame {
         }
         else {
             JOptionPane.showMessageDialog(null, "No rooms available in this Hotel for the chosen dates", "Search", JOptionPane.ERROR_MESSAGE);
-
         }
     }//GEN-LAST:event_skodaHerbActionPerformed
 
@@ -550,6 +561,15 @@ public final class HotelForm extends javax.swing.JFrame {
     private void jLabelMinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelMinMouseClicked
         this.setState(JFrame.ICONIFIED);
     }//GEN-LAST:event_jLabelMinMouseClicked
+
+    private void jButtonReadReviewsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReadReviewsActionPerformed
+        ReviewForm rf;
+        rf = new ReviewForm(theHotel);
+        rf.setVisible(true);
+        rf.pack();
+        rf.setLocationRelativeTo(null);
+        rf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+    }//GEN-LAST:event_jButtonReadReviewsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -606,6 +626,7 @@ public final class HotelForm extends javax.swing.JFrame {
     private javax.swing.JButton haettaVid;
     private javax.swing.JLabel heitiHotel;
     private javax.swing.JLabel hotelStjornur;
+    private javax.swing.JButton jButtonReadReviews;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelExit;
     private javax.swing.JLabel jLabelMin;

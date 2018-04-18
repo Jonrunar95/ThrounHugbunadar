@@ -267,7 +267,7 @@ public class RegisterForm extends javax.swing.JFrame {
 
     private void jLabelCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCloseMouseClicked
 
-        System.exit(0);
+        this.dispose();
 
     }//GEN-LAST:event_jLabelCloseMouseClicked
 

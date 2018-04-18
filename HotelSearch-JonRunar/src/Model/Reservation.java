@@ -14,7 +14,7 @@ import java.util.Date;
 public class Reservation {
     private Room room;
     private User user;
-    private Date date;
+    private String date;
     
     public Room getRoom() {
         return room;
@@ -32,11 +32,11 @@ public class Reservation {
         this.user = user;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
