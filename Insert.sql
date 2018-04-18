@@ -19,7 +19,7 @@ VALUES (
     "Hótel Laki",
     "Kirkjubæjarklaustur",
     4,
-    "https://notendur.hi.is/~jrb6/Photos/Placeholder.png",
+    "https://notendur.hi.is/athh15/MyndirHotel/HotelLaki.png",
     "Free Wi-fi;Wheelchair accessability;Breakfast included;Gym in Hotel;Walking paths"
 ),
 (
@@ -27,7 +27,7 @@ VALUES (
     "Hótel Reykjavík",
     "Reykjavík",
     3,
-    "https://notendur.hi.is/~jrb6/Photos/Placeholder.png",
+    "https://notendur.hi.is/athh15/MyndirHotel/hotelReykjavik.jpg",
     "Breakfast included;Downtown;Shower in Rooms"
 ),
 (
@@ -35,7 +35,7 @@ VALUES (
     "Hótel Reykjavík Center",
     "Reykjavík",
     4,
-    "https://notendur.hi.is/athh15/MyndirHotel/hotelReykjavik.jpg",
+    "https://notendur.hi.is/athh15/MyndirHotel/hotelPlaza.jpg",
     "Free Wi-fi;Breakfast included;Tv in Rooms;Spa in Hotel;Gym in Hotel"
 ),
 (
@@ -43,7 +43,7 @@ VALUES (
     "Grand Hotel Reyjkavík",
     "Reykjavík",
     5,
-    "https://notendur.hi.is/~jrb6/Photos/Placeholder.png",
+    "https://notendur.hi.is/athh15/MyndirHotel/GrandHotel.jpg",
     "Wheelchair accessability;Free Wi-fi;Gym in Hotel;Breakfast included;Downtown;Spa in Hotel;Shower in Rooms;Tv in Rooms"
 ),
 (
@@ -51,7 +51,7 @@ VALUES (
     "Hótel Saga",
     "Reykjavík",
     4,
-    "https://notendur.hi.is/~jrb6/Photos/Placeholder.png",
+    "https://notendur.hi.is/athh15/MyndirHotel/HotelSaga.jpg",
     "Free Wi-fi;Tv in Rooms"
 );
 
@@ -90,7 +90,7 @@ VALUES (
 (
     4,
     1,
-    1,
+    0,
     8500,
     2,
     "https://notendur.hi.is/athh15/MyndirHotel/roomPlaza.jpg"
@@ -109,7 +109,7 @@ VALUES (
     1,
     25000,
     5,
-    "https://notendur.hi.is/~jrb6/Photos/Placeholder.png"
+    "https://notendur.hi.is/athh15/MyndirHotel/HerbergiGrand-1.jpg"
 ),
 (
     7,
@@ -117,7 +117,7 @@ VALUES (
     1,
     18000,
     5,
-    "https://notendur.hi.is/~jrb6/Photos/Placeholder.png"
+    "https://notendur.hi.is/athh15/MyndirHotel/HerbergiGrand-2.jpg"
 ),
 (
     8,
@@ -125,7 +125,7 @@ VALUES (
     1,
     10000,
     3,
-    "https://notendur.hi.is/~jrb6/Photos/Placeholder.png"
+    "https://notendur.hi.is/athh15/MyndirHotel/roomReykjavik.jpg"
 ),
 (
     9,
@@ -133,7 +133,7 @@ VALUES (
     1,
     8000,
     6,
-    "https://notendur.hi.is/~jrb6/Photos/Placeholder.png"
+    "https://notendur.hi.is/athh15/MyndirHotel/HerbergiSaga-1.jpg"
 );
 
 INSERT INTO User (
