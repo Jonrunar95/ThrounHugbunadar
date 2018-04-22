@@ -10,6 +10,7 @@ import Model.Hotel;
 import java.util.ArrayList;
 import static Controller.DatabaseController.getReviewsDatabase;
 import static Controller.DatabaseController.getReviewsById;
+import static Controller.DatabaseController.createReview;
 import Model.HotelReview;
 import Model.Reservation;
 
@@ -33,5 +34,9 @@ public class ReviewController {
     public static ArrayList<Reservation> getReservationsByUserId(int id) {
         ArrayList<Reservation> Reservations = getReservationsById(id);
         return Reservations;
+    }
+    
+    public static void InsertReview(String user, String hotel, int star, String text){
+        int update = createReview(user, hotel, star, text);
     }
 }

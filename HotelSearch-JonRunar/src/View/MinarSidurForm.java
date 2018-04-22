@@ -12,33 +12,40 @@ import static Controller.ReviewController.getHotelReviewByUserId;
 import static Controller.ReviewController.getReservationsByUserId;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Notandi
  */
 public class MinarSidurForm extends javax.swing.JFrame {
    public static int user;
+   public int selecteHotel;
+   public ArrayList<Reservation> reservation;
+   public ArrayList<HotelReview> hotelReview;
     /**
      * Creates new form MinarSidurForm
      */
     public MinarSidurForm(int user) {
+        
         this.user = user;
         initComponents();
         String s = "";
-        ArrayList<Reservation> reservation = getReservationsByUserId(user);
-        ArrayList<HotelReview> hotelReview = getHotelReviewByUserId(user);
+        reservation = getReservationsByUserId(user);
+        hotelReview = getHotelReviewByUserId(user);
         DefaultListModel<String> modelRes = new DefaultListModel<>();
         for(int i=0; i<reservation.size(); i++) {
-            s += reservation.get(i).getRoom().getHotel().getName() + ": " + reservation.get(i).getDate();// + System.lineSeparator();
+            s += reservation.get(i).getRoom().getHotel().getName() + ": " + reservation.get(i).getDate();
             modelRes.addElement(s);
             s = "";
         }
         jList1.setModel(modelRes);
         //jTextAreaReservations.setText(s);
         DefaultListModel<String> modelRev = new DefaultListModel<>();
-        String k = "";//";";
+        String k = "";
         for(int i=0; i<hotelReview.size(); i++) {
-            k += hotelReview.get(i).getHotel().getName() + ": " + hotelReview.get(i).getTextReview();// + "%n";
+            k += hotelReview.get(i).getHotel().getName() + ": ";
+            k += hotelReview.get(i).getTextReview() + ". " ;
+            k += hotelReview.get(i).getStarReview() + " stjörnur";
             modelRev.addElement(k);
             k="";
         }
@@ -204,8 +211,21 @@ public class MinarSidurForm extends javax.swing.JFrame {
 
     private void jButtonWriteReviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonWriteReviewActionPerformed
         //this.dispose();
-        AddReviewForm ar  = new AddReviewForm();
-        //bæta við tenginu og uppfærslu
+        int index = jList1.getSelectedIndex();
+        if(index == -1) {
+            JOptionPane.showMessageDialog(null, "Veldu hótel á listanum til að skrifa umsókn um", "Search", JOptionPane.ERROR_MESSAGE);
+
+        }
+        else {
+            String hotelId = reservation.get(index).getRoom().getHotel().getHotelId() +"";
+            System.out.print(hotelId);
+            AddReviewForm ar  = new AddReviewForm(user +"", hotelId);
+            ar.setVisible(true);
+            ar.pack();
+            ar.setLocationRelativeTo(null);
+            ar.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            this.dispose();
+        }
     }//GEN-LAST:event_jButtonWriteReviewActionPerformed
 
     private void jLabelMinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelMinMouseClicked

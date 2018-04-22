@@ -5,10 +5,9 @@
  */
 package View;
 
-import Model.Hotel;
-import Model.User;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import static Controller.ReviewController.InsertReview;
 
 /**
  *
@@ -17,10 +16,15 @@ import javax.swing.JOptionPane;
 public class AddReviewForm extends javax.swing.JFrame {
     private String textReview;
     private int starReview;
+    private static String userId;
+    private static String hotelId;
     /**
      * Creates new form AddReview
      */
-    public AddReviewForm() {
+    public AddReviewForm(String userId, String hotelId) {
+        this.userId = userId;
+        this.hotelId = hotelId;
+        
         initComponents();
     }
 
@@ -39,7 +43,7 @@ public class AddReviewForm extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButtonAddReview = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jTextFieldStars = new javax.swing.JTextField();
+        jComboBoxStars = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jLabelMin = new javax.swing.JLabel();
         jLabelExit = new javax.swing.JLabel();
@@ -65,6 +69,8 @@ public class AddReviewForm extends javax.swing.JFrame {
 
         jLabel3.setText("Give stars:");
 
+        jComboBoxStars.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -72,22 +78,22 @@ public class AddReviewForm extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(36, 36, 36)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel1)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(93, 93, 93)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextFieldStars, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(57, 57, 57)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel1))
                         .addGap(0, 41, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButtonAddReview)))
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(96, 96, 96)
+                .addComponent(jComboBoxStars, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -98,9 +104,9 @@ public class AddReviewForm extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addComponent(jLabel3)
-                .addGap(4, 4, 4)
-                .addComponent(jTextFieldStars, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jComboBoxStars, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43)
                 .addComponent(jButtonAddReview)
                 .addGap(23, 23, 23))
         );
@@ -184,12 +190,20 @@ public class AddReviewForm extends javax.swing.JFrame {
 
     private void jButtonAddReviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddReviewActionPerformed
         // TODO add your handling code here:
-        if(!alltTilStadar()) {
-            JOptionPane.showMessageDialog(this, "Information needs to be enter in correct form!");
+        textReview = jTextAreaWrittenReview.getText();
+        if(textReview.equals("")) {
+            JOptionPane.showMessageDialog(this, "Review text cant be empty");
         }
         else {
-            textReview = jTextAreaWrittenReview.getText();
-            starReview = Integer.valueOf(jTextFieldStars.getText());
+            starReview = Integer.valueOf(jComboBoxStars.getSelectedIndex());
+            starReview++;
+            InsertReview(userId, hotelId, starReview, textReview);
+            
+            MinarSidurForm msf = new MinarSidurForm(Integer.parseInt(userId));
+            msf.setVisible(true);
+            msf.pack();
+            msf.setLocationRelativeTo(null);
+            msf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             this.dispose();
         }
     }//GEN-LAST:event_jButtonAddReviewActionPerformed
@@ -230,13 +244,14 @@ public class AddReviewForm extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddReviewForm().setVisible(true);
+                new AddReviewForm(userId, hotelId).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAddReview;
+    private javax.swing.JComboBox<String> jComboBoxStars;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -246,26 +261,6 @@ public class AddReviewForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextAreaWrittenReview;
-    private javax.swing.JTextField jTextFieldStars;
     // End of variables declaration//GEN-END:variables
 
-    private boolean alltTilStadar() {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        boolean tilStadar = true;
-        if(!jTextAreaWrittenReview.getText().equals("") && !rettFormStjarna()) tilStadar = false;
-        return tilStadar;
-    }
-
-    private boolean rettFormStjarna() {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        boolean rettStjarna = true;
-        int i;
-        try {
-            i = Integer.valueOf(jTextFieldStars.getText());
-            if(i>5 || i<0) rettStjarna = false;
-        } catch(NumberFormatException e) {
-            rettStjarna = false;
-        }
-        return rettStjarna;
-    }
 }

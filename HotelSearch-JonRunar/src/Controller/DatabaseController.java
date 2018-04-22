@@ -29,8 +29,9 @@ import javax.swing.JOptionPane;
  * @author Notandi
  */
 public class DatabaseController {
-    public static final String DB_URL = "jdbc:sqlite:C:/Users/Brynjar Geir/OneDrive/Documents/GitHub/ThrounHugbunadar/Hoteldb.db";
-    //jdbc:sqlite:C:/Users/Notandi/Documents/Skóli/Þróun Hugbúnaðar/ThrounHugbunadar/Hoteldb.db";
+    public static final String DB_URL =  "jdbc:sqlite:C:/Users/Notandi/Documents/Skóli/Þróun Hugbúnaðar/ThrounHugbunadar/Hoteldb.db";
+        //"jdbc:sqlite:C:/Users/Brynjar Geir/OneDrive/Documents/GitHub/ThrounHugbunadar/Hoteldb.db";
+   
 
     /**
      *
@@ -269,7 +270,7 @@ public class DatabaseController {
             statement.setQueryTimeout(30);
             executeUpdate = statement.executeUpdate(query);
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex.toString());
+            System.err.println(ex.toString());
         }
         return executeUpdate;
     }
@@ -284,7 +285,6 @@ public class DatabaseController {
             ResultSet rs = statement.executeQuery("SELECT * from User WHERE username = '" + username + "' AND password = '" + password + "'");
             while (rs.next()) {
                 String stringLog = rs.getString("id");
-                System.out.print(stringLog);
                 log = Integer.parseInt(stringLog);
             }
         } catch (SQLException ex) { 
@@ -367,20 +367,24 @@ public class DatabaseController {
     
         public static ArrayList<HotelReview> getReviewsById(int userid) {
         Connection connection = null;
-        ArrayList<HotelReview> hotelReviews = null;
-        try {    
+        Connection connection2 = null;
+        Connection connection3 = null;
+        ArrayList<HotelReview> hotelReviews = new ArrayList<>();
+        try {
             connection = DriverManager.getConnection(DB_URL);
+            connection2 = DriverManager.getConnection(DB_URL);
+            connection3 = DriverManager.getConnection(DB_URL);
             Statement statement = connection.createStatement();
+            Statement statement2 = connection2.createStatement();
+            Statement statement3 = connection3.createStatement();
             statement.setQueryTimeout(30);
-           
+            ResultSet rs = statement.executeQuery("SELECT * from HotelReview WHERE userId = " + userid);
             
-            ResultSet rs = statement.executeQuery("SELECT * from Hotelreview WHERE userId = " + userid);
-            hotelReviews = new ArrayList<>();
             while (rs.next()) {
                 String hotelId = rs.getString("hotelId");
                 int stars = Integer.parseInt(rs.getString("starReview"));
                 String text = rs.getString("textReview");
-                ResultSet rs2 = statement.executeQuery("SELECT * FROM User WHERE id = " + userid);
+                ResultSet rs2 = statement2.executeQuery("SELECT * FROM User WHERE id = " + userid);
                 User user = null;
                 while(rs2.next()) {
                     String name = rs2.getString("name");
@@ -388,7 +392,7 @@ public class DatabaseController {
                     String username = rs2.getString("username");
                     user = new User(userid, name, ssn, username, "");
                 }
-                ResultSet rs3 = statement.executeQuery("SELECT * FROM Hotel WHERE id = " + hotelId);
+                ResultSet rs3 = statement3.executeQuery("SELECT * FROM Hotel WHERE id = " + hotelId);
                 Hotel hotel = null;
                 while(rs3.next()) {
                     int id = Integer.parseInt(rs3.getString("id"));
@@ -424,10 +428,19 @@ public class DatabaseController {
         
     public static ArrayList<Reservation> getReservationsById(int userid) {
         Connection connection = null;
+        Connection connection2 = null;
+        Connection connection3 = null;
+        Connection connection4 = null;
         ArrayList<Reservation> reservations = null;
         try {    
             connection = DriverManager.getConnection(DB_URL);
+            connection2 = DriverManager.getConnection(DB_URL);
+            connection3 = DriverManager.getConnection(DB_URL);
+            connection4 = DriverManager.getConnection(DB_URL);
             Statement statement = connection.createStatement();
+            Statement statement2 = connection2.createStatement();
+            Statement statement3 = connection3.createStatement();
+            Statement statement4 = connection4.createStatement();
             statement.setQueryTimeout(30);
 
             ResultSet rs = statement.executeQuery("SELECT * from Reservation WHERE userId = " + userid);
@@ -435,7 +448,7 @@ public class DatabaseController {
             while (rs.next()) {
                 String roomId = rs.getString("roomId");
                 String date = rs.getString("date");
-                ResultSet rs2 = statement.executeQuery("SELECT * FROM User WHERE id = " + userid);
+                ResultSet rs2 = statement2.executeQuery("SELECT * FROM User WHERE id = " + userid);
                 User user = null;
                 while(rs2.next()) {
                     String name = rs2.getString("name");
@@ -443,7 +456,7 @@ public class DatabaseController {
                     String username = rs2.getString("username");
                     user = new User(userid, name, ssn, username, "");
                 }
-                ResultSet rs3 = statement.executeQuery("SELECT * FROM Room WHERE id = " + roomId);
+                ResultSet rs3 = statement3.executeQuery("SELECT * FROM Room WHERE id = " + roomId);
                 Room room = null;
                 while(rs3.next()) {
                     int id = Integer.parseInt(rs3.getString("id"));
@@ -456,15 +469,16 @@ public class DatabaseController {
                     int price = Integer.parseInt(rs3.getString("price"));
                     int hotelId = Integer.parseInt(rs3.getString("hotelId"));
                     String photo_url = rs3.getString("photo_url");
-                    ResultSet rs4 = statement.executeQuery("SELECT * FROM Hotel WHERE id = " + hotelId);
+                    ResultSet rs4 = statement4.executeQuery("SELECT * FROM Hotel WHERE id = " + hotelId);
                     Hotel hotel = null;
                     while(rs4.next()) {
-                        int hotelid = Integer.parseInt(rs3.getString("id"));
-                        String name = rs3.getString("name");
-                        String location = rs3.getString("location");
-                        int start = Integer.parseInt(rs3.getString("stars"));
-                        String photo_url2 = rs3.getString("photo_url");
-                        String strLine = rs3.getString("conveniences");
+                        int hotelid = Integer.parseInt(rs4.getString("id"));
+                        System.out.println(hotelid);
+                        String name = rs4.getString("name");
+                        String location = rs4.getString("location");
+                        int start = Integer.parseInt(rs4.getString("stars"));
+                        String photo_url2 = rs4.getString("photo_url");
+                        String strLine = rs4.getString("conveniences");
                         String[] conveniences = strLine.split(";");
                         hotel = new Hotel(hotelid, name, location, start, photo_url2, conveniences);
                     }
@@ -495,4 +509,20 @@ public class DatabaseController {
         }
         return reservations;
     }
+    
+    public static int createReview(String user, String hotel, int star, String text){
+        int executeUpdate = 0;
+        try {
+            Connection connection =  DriverManager.getConnection(DB_URL);
+            Statement statement = connection.createStatement();
+            statement.setQueryTimeout(30);
+            String query = "INSERT INTO HotelReview(userId, hotelId, starReview, textReview) VALUES ('" + user + "', '" + hotel + "', '" + star +"', '" + text + "')";
+            executeUpdate = statement.executeUpdate(query);
+            
+        } catch (SQLException ex) {
+            System.err.println(ex.toString());
+        }
+        return executeUpdate;
+    }
+
 }
