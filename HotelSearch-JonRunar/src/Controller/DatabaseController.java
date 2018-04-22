@@ -29,7 +29,8 @@ import javax.swing.JOptionPane;
  * @author Notandi
  */
 public class DatabaseController {
-    public static final String DB_URL = "jdbc:sqlite:C:/Users/Brynjar Geir/OneDrive/Documents/GitHub/ThrounHugbunadar/Hoteldb.db";//jdbc:sqlite:C:/Users/Notandi/Documents/Skóli/Þróun Hugbúnaðar/ThrounHugbunadar/Hoteldb.db";
+    public static final String DB_URL = "jdbc:sqlite:C:/Users/Brynjar Geir/OneDrive/Documents/GitHub/ThrounHugbunadar/Hoteldb.db";
+    //jdbc:sqlite:C:/Users/Notandi/Documents/Skóli/Þróun Hugbúnaðar/ThrounHugbunadar/Hoteldb.db";
 
     /**
      *

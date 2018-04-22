@@ -10,6 +10,7 @@ import Model.Reservation;
 import java.util.ArrayList;
 import static Controller.ReviewController.getHotelReviewByUserId;
 import static Controller.ReviewController.getReservationsByUserId;
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 /**
  *
@@ -26,14 +27,22 @@ public class MinarSidurForm extends javax.swing.JFrame {
         String s = "";
         ArrayList<Reservation> reservation = getReservationsByUserId(user);
         ArrayList<HotelReview> hotelReview = getHotelReviewByUserId(user);
+        DefaultListModel<String> modelRes = new DefaultListModel<>();
         for(int i=0; i<reservation.size(); i++) {
-            s += reservation.get(i).getRoom().getHotel().getName() + ": " + reservation.get(i).getDate() + System.lineSeparator();
+            s += reservation.get(i).getRoom().getHotel().getName() + ": " + reservation.get(i).getDate();// + System.lineSeparator();
+            modelRes.addElement(s);
+            s = "";
         }
-        jTextAreaReservations.setText(s);
-        String k = ";";
+        jList1.setModel(modelRes);
+        //jTextAreaReservations.setText(s);
+        DefaultListModel<String> modelRev = new DefaultListModel<>();
+        String k = "";//";";
         for(int i=0; i<hotelReview.size(); i++) {
-            k += hotelReview.get(i).getHotel().getName() + ": " + hotelReview.get(i).getTextReview() + "%n";
-        }        
+            k += hotelReview.get(i).getHotel().getName() + ": " + hotelReview.get(i).getTextReview();// + "%n";
+            modelRev.addElement(k);
+            k="";
+        }
+        jList2.setModel(modelRev);
     }
 
     /**
@@ -46,13 +55,13 @@ public class MinarSidurForm extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextAreaReviews = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
+        jButtonWriteReview = new javax.swing.JButton();
         jLabelReviews = new javax.swing.JLabel();
         jLabelReservation = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextAreaReservations = new javax.swing.JTextArea();
+        jList1 = new javax.swing.JList<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jList2 = new javax.swing.JList<>();
         jPanel1 = new javax.swing.JPanel();
         jLabelMin = new javax.swing.JLabel();
         jLabelExit = new javax.swing.JLabel();
@@ -64,15 +73,10 @@ public class MinarSidurForm extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(228, 241, 254));
         jPanel2.setForeground(new java.awt.Color(228, 241, 254));
 
-        jTextAreaReviews.setEditable(false);
-        jTextAreaReviews.setColumns(20);
-        jTextAreaReviews.setRows(5);
-        jScrollPane2.setViewportView(jTextAreaReviews);
-
-        jButton1.setText("Back");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonWriteReview.setText("add review");
+        jButtonWriteReview.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonWriteReviewActionPerformed(evt);
             }
         });
 
@@ -80,10 +84,19 @@ public class MinarSidurForm extends javax.swing.JFrame {
 
         jLabelReservation.setText("My Reservations:");
 
-        jTextAreaReservations.setEditable(false);
-        jTextAreaReservations.setColumns(20);
-        jTextAreaReservations.setRows(5);
-        jScrollPane1.setViewportView(jTextAreaReservations);
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(jList1);
+
+        jList2.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane2.setViewportView(jList2);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -92,31 +105,29 @@ public class MinarSidurForm extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1)
-                            .addComponent(jLabelReviews))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabelReservation)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jButtonWriteReview)
+                    .addComponent(jLabelReviews)
+                    .addComponent(jLabelReservation))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelReservation))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabelReviews)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabelReservation)
+                        .addGap(130, 130, 130)
+                        .addComponent(jLabelReviews)
+                        .addGap(89, 89, 89)
+                        .addComponent(jButtonWriteReview)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -156,7 +167,7 @@ public class MinarSidurForm extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 157, Short.MAX_VALUE)
                 .addComponent(jLabelMin)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabelExit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -191,9 +202,11 @@ public class MinarSidurForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jButtonWriteReviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonWriteReviewActionPerformed
+        //this.dispose();
+        AddReviewForm ar  = new AddReviewForm();
+        //bæta við tenginu og uppfærslu
+    }//GEN-LAST:event_jButtonWriteReviewActionPerformed
 
     private void jLabelMinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelMinMouseClicked
         // TODO add your handling code here:
@@ -241,17 +254,17 @@ public class MinarSidurForm extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonWriteReview;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabelExit;
     private javax.swing.JLabel jLabelMin;
     private javax.swing.JLabel jLabelReservation;
     private javax.swing.JLabel jLabelReviews;
+    private javax.swing.JList<String> jList1;
+    private javax.swing.JList<String> jList2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextAreaReservations;
-    private javax.swing.JTextArea jTextAreaReviews;
     // End of variables declaration//GEN-END:variables
 }
